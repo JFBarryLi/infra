@@ -1,17 +1,15 @@
 resource "aws_cloudfront_origin_access_identity" "ai" {
-  comment = "Access identity for the ${var.domain_name} distribution"
+  comment = "Access identity for the ${var.domain_name} distribution."
 }
 
 resource "aws_cloudfront_distribution" "cf" {
   enabled = true
-  comment = "Distribution for ${var.domain_name}: ${join(",", var.domain_aliases)}"
+  comment = "Distribution for ${var.domain_name}."
 
   http_version        = "http2"
   is_ipv6_enabled     = true
   default_root_object = "index.html"
   price_class         = "PriceClass_All"
-
-  aliases = var.domain_aliases
 
   viewer_certificate {
     ssl_support_method       = "sni-only"
