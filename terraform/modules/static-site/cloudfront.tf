@@ -56,7 +56,7 @@ resource "aws_cloudfront_distribution" "cf" {
 
   logging_config {
     include_cookies = false
-    bucket          = var.bucket_logs_domain
+    bucket          = var.log_bucket_name
     prefix          = "${data.aws_caller_identity.current.account_id}/${var.domain_name}/"
   }
 

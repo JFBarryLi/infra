@@ -1,5 +1,5 @@
 output "bucket_arn" {
-  description = "The name of the s3 bucket that the distribution fronts."
+  description = "The arn of the s3 bucket that the distribution fronts."
   value       = aws_s3_bucket.site_bucket.arn
 }
 

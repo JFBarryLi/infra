@@ -41,7 +41,7 @@ data "aws_iam_policy_document" "deployer" {
       "s3:PutObject",
     ]
 
-    resources = ["${aws_s3_bucket.s3.arn}/*"]
+    resources = ["${aws_s3_bucket.site_bucket.arn}/*"]
   }
 
   statement {
