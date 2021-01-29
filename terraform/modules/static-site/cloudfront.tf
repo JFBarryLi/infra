@@ -7,7 +7,7 @@ resource "aws_cloudfront_distribution" "cf" {
   comment = "Distribution for ${var.domain_name}."
 
   http_version        = "http2"
-  is_ipv6_enabled     = true
+  is_ipv6_enabled     = false
   default_root_object = "index.html"
   price_class         = "PriceClass_All"
 
