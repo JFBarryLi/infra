@@ -8,7 +8,7 @@ resource "aws_s3_bucket_public_access_block" "log_bucket" {
 }
 
 resource "aws_s3_bucket" "log_bucket" {
-  bucket        = "${vars.bucket_name}"
+  bucket        = var.log_bucket_name
   acl           = "log-delivery-write"
   force_destroy = false
 
@@ -49,7 +49,7 @@ resource "aws_s3_bucket" "log_bucket" {
   }
 
   tags = {
-    Name      = "${var.log_bucket_name}"
+    Name      = "var.log_bucket_name"
     ManagedBy = "terraform"
     Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   }

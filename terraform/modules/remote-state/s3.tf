@@ -8,7 +8,7 @@ resource "aws_s3_bucket_public_access_block" "state" {
 }
 
 resource "aws_s3_bucket" "state" {
-  bucket        = "${var.state_bucket_name}"
+  bucket        = var.state_bucket_name
   acl           = "private"
   force_destroy = false
 
@@ -17,7 +17,7 @@ resource "aws_s3_bucket" "state" {
   }
 
   logging {
-    target_bucket = "${var.log_bucket_name}"
+    target_bucket = var.log_bucket_name
   }
 
   server_side_encryption_configuration {
@@ -40,7 +40,7 @@ resource "aws_s3_bucket" "state" {
   }
 
   tags = {
-    Name      = "${var.state_bucket_name}"
+    Name      = var.state_bucket_name
     ManagedBy = "terraform"
     Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   }
