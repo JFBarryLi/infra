@@ -4,8 +4,6 @@ repos:
     hooks:
     -   id: check-yaml
     -   id: end-of-file-fixer
-    -   id: trailing-whitespace
-    -   id: check-ast
     -   id: check-case-conflict
     -   id: check-json
     -   id: check-symlinks
@@ -16,7 +14,3 @@ repos:
         args: [--fix=lf]
     -   id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
--   repo: https://gitlab.com/pycqa/flake8
-    rev: '3.7.9'
-    hooks:
-    -   id: flake8
