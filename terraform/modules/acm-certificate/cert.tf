@@ -1,3 +1,9 @@
+locals {
+  domain_parts = split(".", var.domain_name)
+  parts_length = length(local.domain_parts)
+  root_dns     = "${local.domain_parts[local.parts_length - 2]}.${local.domain_parts[local.parts_length - 1]}"
+}
+
 resource "aws_acm_certificate" "cert" {
   provider = aws.cert
 
@@ -6,7 +12,7 @@ resource "aws_acm_certificate" "cert" {
   validation_method = "DNS"
 
   tags = {
-    Name      = "${var.domain_name}"
+    Name      = var.domain_name
     ManagedBy = "terraform"
     Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   }
@@ -21,7 +27,7 @@ resource "aws_acm_certificate" "cert" {
 data "aws_route53_zone" "zone" {
   provider = aws.dns
 
-  name         = "${var.domain_name}"
+  name         = local.root_dns
   private_zone = false
 }
 

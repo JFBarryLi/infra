@@ -4,7 +4,7 @@ resource "aws_iam_user" "deployer" {
   force_destroy = true
 
   tags = {
-    Name      = "${var.domain_name}"
+    Name      = var.domain_name
     ManagedBy = "terraform"
     Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   }
@@ -15,7 +15,7 @@ resource "aws_iam_access_key" "deployer" {
 }
 
 resource "aws_iam_user_policy" "deployer" {
-  name = "${var.domain_name}-deployer"
+  name        = "${var.domain_name}-deployer"
   user        = aws_iam_user.deployer.name
   policy      = data.aws_iam_policy_document.deployer.json
 }

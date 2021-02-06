@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "site_bucket" {
-  bucket        = "${var.domain_name}"
+  bucket        = var.domain_name
   acl           = "private"
-  force_destory = true
+  force_destroy = true
 
   versioning {
     enabled = true
@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "site_bucket" {
 
   server_side_encryption_configuration {
     rule {
-      apply_server_side_encrption_by_default {
+      apply_server_side_encryption_by_default {
         sse_algorithm = "AES256"
       }
     }
@@ -27,7 +27,7 @@ resource "aws_s3_bucket" "site_bucket" {
   }
 
   tags = {
-    Name      = "${var.domain_name}"
+    Name      = var.domain_name
     ManagedBy = "terraform"
     Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   }
@@ -38,7 +38,7 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
   policy = data.aws_iam_policy_document.bucket_policy_doc.json
 }
 
-data "aws_iam_policy_document" "bucket_poliy_doc" {
+data "aws_iam_policy_document" "bucket_policy_doc" {
   statement {
     sid    = "DenyUnencrypted"
     effect = "Deny"

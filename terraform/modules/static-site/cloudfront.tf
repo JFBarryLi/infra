@@ -32,8 +32,8 @@ resource "aws_cloudfront_distribution" "cf" {
     viewer_protocol_policy = "redirect-to-https"
 
     min_ttl     = 0
-    default_ttl = 31536000 # one year
-    max_ttl     = 31536000 # one year
+    default_ttl = 86400
+    max_ttl     = 31536000
 
     forwarded_values {
       headers      = []
@@ -56,12 +56,12 @@ resource "aws_cloudfront_distribution" "cf" {
 
   logging_config {
     include_cookies = false
-    bucket          = var.log_bucket_name
+    bucket          = var.log_bucket_domain
     prefix          = "${data.aws_caller_identity.current.account_id}/${var.domain_name}/"
   }
 
   tags = {
-    Name      = "${var.domain_name}"
+    Name      = var.domain_name
     ManagedBy = "terraform"
     Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   }
