@@ -23,6 +23,8 @@ resource "aws_cloudfront_distribution" "cf" {
     }
   }
 
+  aliases = [var.domain_name]
+
   default_cache_behavior {
     target_origin_id = var.domain_name
 
