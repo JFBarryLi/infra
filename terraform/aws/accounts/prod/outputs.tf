@@ -13,3 +13,9 @@ output "deployer_secret_access_key" {
   value       = module.fea_site.deployer_secret_access_key
   sensitive   = true
 }
+
+output "fea_cf_distribution_id" {
+  description = "Fea cloudfront distribution_id."
+  value       = module.fea_site.distribution_id
+  sensitive   = true
+}

@@ -45,6 +45,18 @@ data "aws_iam_policy_document" "deployer" {
   }
 
   statement {
+    sid    = "AllowDeleteFromBucket"
+    effect = "Allow"
+
+    actions = [
+      "s3:DeleteObject",
+    ]
+
+    resources = ["${aws_s3_bucket.site_bucket.arn}/*"]
+  }
+
+
+  statement {
     sid    = "AllowCreateInvalidations"
     effect = "Allow"
 
