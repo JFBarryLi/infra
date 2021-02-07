@@ -6,5 +6,9 @@ terraform {
     acl            = "bucket-owner-full-control"
     encrypt        = "true"
     dynamodb_table = "TerraformRemoteStateLock"
+
+    workspaces {
+      name = "prod"
+    }
   }
 }
