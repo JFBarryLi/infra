@@ -3,19 +3,29 @@ output "barryli_name_servers" {
   value       = module.barryli_ca.name_servers
 }
 
-output "deployer_access_key_id" {
+output "site_fea_deployer_access_key_id" {
   description = "The AWS access key id that can deploy to the site."
   value       = module.fea_site.deployer_access_key_id
 }
 
-output "deployer_secret_access_key" {
+output "site_fea_deployer_secret_access_key" {
   description = "The AWS secret access key that can deploy to the site."
   value       = module.fea_site.deployer_secret_access_key
   sensitive   = true
 }
 
-output "fea_cf_distribution_id" {
+output "site_fea_cf_distribution_id" {
   description = "Fea cloudfront distribution_id."
   value       = module.fea_site.distribution_id
   sensitive   = true
+}
+
+output "site_fea_bucket_name" {
+  description = "Fea site bucket name."
+  value       = module.fea_site.bucket_name
+}
+
+output "site_fea_bucket_region" {
+  description = "Fea site bucket region/"
+  value       = module.fea_site.bucket_region
 }

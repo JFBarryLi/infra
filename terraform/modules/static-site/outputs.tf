@@ -8,6 +8,11 @@ output "bucket_name" {
   value       = aws_s3_bucket.site_bucket.id
 }
 
+output "bucket_region" {
+  description = "Site bucket region."
+  value       = aws_s3_bucket.site_bucket.region
+}
+
 output "distribution_id" {
   description = "The ID of the created cloudfront distribution."
   value       = aws_cloudfront_distribution.cf.id
