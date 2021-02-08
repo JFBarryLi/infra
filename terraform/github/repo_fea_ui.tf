@@ -32,7 +32,7 @@ resource "github_branch_protection" "master" {
 
   pattern                = "master"
   allows_deletions       = false
-  allows_force_pushes     = false
+  allows_force_pushes    = false
   enforce_admins         = false
   require_signed_commits = false
 
