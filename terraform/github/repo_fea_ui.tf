@@ -17,17 +17,17 @@ resource "github_repository" "fea-ui" {
   ]
 }
 
-resource "github_branch" "master" {
+resource "github_branch" "fea-ui" {
   repository = github_repository.fea-ui.name
   branch     = "master"
 }
 
-resource "github_branch_default" "default"{
+resource "github_branch_default" "fea-ui"{
   repository = github_repository.fea-ui.name
-  branch     = github_branch.master.branch
+  branch     = github_branch.fea-ui.branch
 }
 
-resource "github_branch_protection" "master" {
+resource "github_branch_protection" "fea-ui" {
   repository_id = github_repository.fea-ui.name
 
   pattern                = "master"
