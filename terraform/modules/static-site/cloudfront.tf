@@ -65,6 +65,5 @@ resource "aws_cloudfront_distribution" "cf" {
   tags = {
     Name      = var.domain_name
     ManagedBy = "terraform"
-    Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   }
 }

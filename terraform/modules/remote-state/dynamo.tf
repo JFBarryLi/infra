@@ -18,6 +18,5 @@ resource "aws_dynamodb_table" "state" {
   tags = {
     Name      = var.state_bucket_name
     ManagedBy = "terraform"
-    Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   }
 }

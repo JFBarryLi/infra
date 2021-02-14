@@ -6,7 +6,6 @@ resource "aws_iam_user" "deployer" {
   tags = {
     Name      = var.domain_name
     ManagedBy = "terraform"
-    Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   }
 }
 

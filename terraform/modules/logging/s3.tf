@@ -51,7 +51,6 @@ resource "aws_s3_bucket" "log_bucket" {
   tags = {
     Name      = "var.log_bucket_name"
     ManagedBy = "terraform"
-    Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   }
 }
 

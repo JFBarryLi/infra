@@ -14,7 +14,6 @@ resource "aws_acm_certificate" "cert" {
   tags = {
     Name      = var.domain_name
     ManagedBy = "terraform"
-    Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   }
 
   lifecycle {

@@ -42,7 +42,6 @@ resource "aws_s3_bucket" "state" {
   tags = {
     Name      = var.state_bucket_name
     ManagedBy = "terraform"
-    Changed   = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   }
 }
 
