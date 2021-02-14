@@ -67,3 +67,5 @@ resource "aws_cloudfront_distribution" "cf" {
     ManagedBy = "terraform"
   }
 }
+
+data "aws_caller_identity" "current" {}
