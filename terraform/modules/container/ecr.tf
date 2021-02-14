@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "ecr" {
-  name                 = "barry-li-prod"
+  name                 = var.repo_name
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -7,7 +7,7 @@ resource "aws_ecr_repository" "ecr" {
   }
 
   tags = {
-    Name      = "barry-li-prod"
+    Name      = var.repo_name
     ManagedBy = "terraform"
   }
 }
