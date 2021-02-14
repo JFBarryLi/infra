@@ -29,3 +29,8 @@ output "site_fea_bucket_region" {
   description = "Fea site bucket region/"
   value       = module.fea_site.bucket_region
 }
+
+output "repository_url" {
+  description = "Ecr repo url."
+  value       = aws_ecr_repository.ecr.repository_url
+}
