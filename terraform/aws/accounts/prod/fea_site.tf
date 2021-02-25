@@ -1,5 +1,5 @@
 module "fea_site" {
-  source = "../../../modules/static-site//"
+  source = "../../../modules/static-site"
 
   domain_name       = "fea.barryli.ca"
   log_bucket_domain = module.logging.bucket_domain

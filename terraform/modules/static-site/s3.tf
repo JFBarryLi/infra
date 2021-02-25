@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "site_bucket" {
+resource "aws_s3_bucket" "site" {
   bucket        = var.domain_name
   acl           = "private"
   force_destroy = true
@@ -32,12 +32,12 @@ resource "aws_s3_bucket" "site_bucket" {
   }
 }
 
-resource "aws_s3_bucket_policy" "bucket_policy" {
-  bucket = aws_s3_bucket.site_bucket.id
-  policy = data.aws_iam_policy_document.bucket_policy_doc.json
+resource "aws_s3_bucket_policy" "site" {
+  bucket = aws_s3_bucket.site.id
+  policy = data.aws_iam_policy_document.site_bucket.json
 }
 
-data "aws_iam_policy_document" "bucket_policy_doc" {
+data "aws_iam_policy_document" "site_bucket" {
   statement {
     sid    = "DenyUnencrypted"
     effect = "Deny"
@@ -58,7 +58,7 @@ data "aws_iam_policy_document" "bucket_policy_doc" {
     }
 
     resources = [
-      "${aws_s3_bucket.site_bucket.arn}/*",
+      "${aws_s3_bucket.site.arn}/*",
     ]
   }
 
@@ -73,7 +73,7 @@ data "aws_iam_policy_document" "bucket_policy_doc" {
 
     actions = ["*"]
 
-    resources = ["${aws_s3_bucket.site_bucket.arn}/*"]
+    resources = ["${aws_s3_bucket.site.arn}/*"]
 
     condition {
       test     = "Bool"
@@ -88,11 +88,11 @@ data "aws_iam_policy_document" "bucket_policy_doc" {
 
     principals {
       type        = "AWS"
-      identifiers = [aws_cloudfront_origin_access_identity.ai.iam_arn]
+      identifiers = [aws_cloudfront_origin_access_identity.this.iam_arn]
     }
 
     actions   = ["s3:ListBucket"]
-    resources = [aws_s3_bucket.site_bucket.arn]
+    resources = [aws_s3_bucket.site.arn]
   }
 
   statement {
@@ -101,10 +101,10 @@ data "aws_iam_policy_document" "bucket_policy_doc" {
 
     principals {
       type        = "AWS"
-      identifiers = [aws_cloudfront_origin_access_identity.ai.iam_arn]
+      identifiers = [aws_cloudfront_origin_access_identity.this.iam_arn]
     }
 
     actions   = ["s3:GetObject"]
-    resources = ["${aws_s3_bucket.site_bucket.arn}/*"]
+    resources = ["${aws_s3_bucket.site.arn}/*"]
   }
 }

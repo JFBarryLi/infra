@@ -32,5 +32,5 @@ output "site_fea_bucket_region" {
 
 output "repository_url" {
   description = "Ecr repo url."
-  value       = module.fea-container.repository_url
+  value       = module.fea_container.repository_url
 }

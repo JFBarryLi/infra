@@ -1,8 +1,8 @@
-resource "aws_cloudfront_origin_access_identity" "ai" {
+resource "aws_cloudfront_origin_access_identity" "this" {
   comment = "Access identity for the ${var.domain_name} distribution."
 }
 
-resource "aws_cloudfront_distribution" "cf" {
+resource "aws_cloudfront_distribution" "this" {
   enabled = true
   comment = "Distribution for ${var.domain_name}."
 
@@ -49,10 +49,10 @@ resource "aws_cloudfront_distribution" "cf" {
 
   origin {
     origin_id   = var.domain_name
-    domain_name = aws_s3_bucket.site_bucket.bucket_domain_name
+    domain_name = aws_s3_bucket.site.bucket_domain_name
 
     s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.ai.cloudfront_access_identity_path
+      origin_access_identity = aws_cloudfront_origin_access_identity.this.cloudfront_access_identity_path
     }
   }
 

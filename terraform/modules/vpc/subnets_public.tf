@@ -20,7 +20,7 @@ resource "aws_route_table" "public" {
   }
 }
 
-resource "aws_route_table_association" "route_table_association" {
+resource "aws_route_table_association" "public" {
   count = length(var.azs)
 
   subnet_id      = aws_subnet.public.id

@@ -1,5 +1,5 @@
 module "cert" {
-  source = "../acm-certificate//"
+  source = "../acm-certificate"
 
   domain_name = var.domain_name
 

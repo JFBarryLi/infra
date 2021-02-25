@@ -1,5 +1,5 @@
-resource "aws_s3_bucket_public_access_block" "log_bucket" {
-  bucket = aws_s3_bucket.log_bucket.id
+resource "aws_s3_bucket_public_access_block" "log" {
+  bucket = aws_s3_bucket.log.id
 
   ignore_public_acls      = true
   block_public_acls       = true
@@ -7,7 +7,7 @@ resource "aws_s3_bucket_public_access_block" "log_bucket" {
   restrict_public_buckets = true
 }
 
-resource "aws_s3_bucket" "log_bucket" {
+resource "aws_s3_bucket" "log" {
   bucket        = var.log_bucket_name
   acl           = "log-delivery-write"
   force_destroy = false
@@ -22,6 +22,11 @@ resource "aws_s3_bucket" "log_bucket" {
         sse_algorithm = "AES256"
       }
     }
+  }
+
+  tags = {
+    Name      = var.log_bucket_name
+    ManagedBy = "terraform"
   }
 
   lifecycle_rule {
@@ -47,15 +52,10 @@ resource "aws_s3_bucket" "log_bucket" {
       days = "365"
     }
   }
-
-  tags = {
-    Name      = "var.log_bucket_name"
-    ManagedBy = "terraform"
-  }
 }
 
-resource "aws_s3_bucket_policy" "log_bucket" {
-  bucket = aws_s3_bucket.log_bucket.id
+resource "aws_s3_bucket_policy" "log" {
+  bucket = aws_s3_bucket.log.id
   policy = data.aws_iam_policy_document.log_bucket.json
 }
 
@@ -71,7 +71,7 @@ data "aws_iam_policy_document" "log_bucket" {
 
     actions = ["*"]
 
-    resources = [aws_s3_bucket.log_bucket.arn]
+    resources = [aws_s3_bucket.log.arn]
 
     condition {
       test     = "Bool"

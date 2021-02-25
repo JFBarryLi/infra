@@ -29,7 +29,7 @@ data "aws_iam_policy_document" "deployer" {
       "s3:GetBucketLocation",
     ]
 
-    resources = [aws_s3_bucket.site_bucket.arn]
+    resources = [aws_s3_bucket.site.arn]
   }
 
   statement {
@@ -40,7 +40,7 @@ data "aws_iam_policy_document" "deployer" {
       "s3:PutObject",
     ]
 
-    resources = ["${aws_s3_bucket.site_bucket.arn}/*"]
+    resources = ["${aws_s3_bucket.site.arn}/*"]
   }
 
   statement {
@@ -51,7 +51,7 @@ data "aws_iam_policy_document" "deployer" {
       "s3:DeleteObject",
     ]
 
-    resources = ["${aws_s3_bucket.site_bucket.arn}/*"]
+    resources = ["${aws_s3_bucket.site.arn}/*"]
   }
 
 
@@ -65,6 +65,6 @@ data "aws_iam_policy_document" "deployer" {
       "cloudfront:ListInvalidations",
     ]
 
-    resources = [aws_cloudfront_distribution.cf.arn]
+    resources = [aws_cloudfront_distribution.this.arn]
   }
 }

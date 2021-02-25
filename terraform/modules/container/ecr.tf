@@ -1,4 +1,4 @@
-resource "aws_ecr_repository" "ecr" {
+resource "aws_ecr_repository" "this" {
   name                 = var.repo_name
   image_tag_mutability = "MUTABLE"
 
@@ -12,8 +12,8 @@ resource "aws_ecr_repository" "ecr" {
   }
 }
 
-resource "aws_ecr_repository_policy" "repo_policy" {
-  repository = aws_ecr_repository.ecr.name
+resource "aws_ecr_repository_policy" "this" {
+  repository = aws_ecr_repository.this.name
 
   policy = <<EOF
 {
@@ -38,8 +38,8 @@ resource "aws_ecr_repository_policy" "repo_policy" {
 EOF
 }
 
-resource "aws_ecr_lifecycle_policy" "lifecycle" {
-  repository = aws_ecr_repository.ecr.name
+resource "aws_ecr_lifecycle_policy" "this" {
+  repository = aws_ecr_repository.this.name
 
   policy = <<EOF
 {
