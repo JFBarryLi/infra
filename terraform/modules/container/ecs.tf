@@ -4,7 +4,7 @@ resource "aws_ecs_cluster" "this" {
 
 resource "aws_ecs_task_definition" "init" {
   family                = "init"
-  container_definitions = file("placeholder_task_def.json")
+  container_definitions = file("${path.module}/placeholder_task_def.json")
 }
 
 resource "aws_ecs_service" "init" {

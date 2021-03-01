@@ -8,9 +8,9 @@ variable "vpc_id" {
   description = "Vpc id."
 }
 
-variable "subnet_id" {
-  type        = string
-  description = "Subnet id for the ecs cluster to be in."
+variable "subnet_ids" {
+  type        = list(string)
+  description = "A list of subnet ids to launch resources in."
 }
 
 variable "ecs_cluster_name" {
