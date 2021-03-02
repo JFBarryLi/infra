@@ -15,6 +15,6 @@ resource "aws_ecs_service" "init" {
 
   placement_constraints {
     type       = "memberOf"
-    expression = "attribute:ecs.availability-zone in ${var.azs}"
+    expression = "attribute:ecs.availability-zone in [${join(", " , var.azs)}]"
   }
 }
