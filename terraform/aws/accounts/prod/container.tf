@@ -6,10 +6,13 @@ module "fea_container" {
   subnet_ids       = module.vpc.subnet_public_ids
   ecs_cluster_name = "fea-cluster"
 
-  instance_type = "t2.micro"
+  instance_type    = "t2.micro"
   desired_capacity = 1
   max_size         = 1
   min_size         = 1
+
+  container_name = "fea-app"
+  container_port = 80
 
   azs = [
     "us-east-1a",

@@ -18,6 +18,17 @@ variable "ecs_cluster_name" {
   description = "Name for the ECS Cluster."
 }
 
+variable "container_name" {
+  type        = string
+  description = "Container name."
+}
+
+variable "container_port" {
+  type        = number
+  description = "Container port."
+  default     = 80
+}
+
 variable "azs" {
   type        = list(string)
   description = "Availability Zones for ecs placements."
