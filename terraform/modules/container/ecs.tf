@@ -10,7 +10,7 @@ data "template_file" "container_definitions" {
   }
 }
 
-resource "aws_ecs_task_definition" "init" {
+resource "aws_ecs_task_definition" "this" {
   family                = var.container_name
   container_definitions = data.template_file.container_definitions.rendered
 }
@@ -18,7 +18,7 @@ resource "aws_ecs_task_definition" "init" {
 resource "aws_ecs_service" "this" {
   name            = "${var.ecs_cluster_name}-service"
   cluster         = aws_ecs_cluster.this.id
-  task_definition = aws_ecs_task_definition.init.arn
+  task_definition = aws_ecs_task_definition.this.arn
   desired_count   = 1
 
   service_registries {
