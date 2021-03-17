@@ -57,3 +57,9 @@ variable "min_size" {
   description = "Min number of instances."
   default     = 1
 }
+
+variable "api_stage_name" {
+  type        = string
+  description = "Deployment api stage name."
+  default     = "dev"
+}
