@@ -21,12 +21,6 @@ resource "aws_ecs_service" "this" {
   task_definition = aws_ecs_task_definition.this.arn
   desired_count   = 1
 
-  service_registries {
-    registry_arn   = aws_service_discovery_service.this.arn
-    container_name = var.container_name
-    container_port = var.container_port
-  }
-
   placement_constraints {
     type       = "memberOf"
     expression = "attribute:ecs.availability-zone in [${join(", " , var.azs)}]"
