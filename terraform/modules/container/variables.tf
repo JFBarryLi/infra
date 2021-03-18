@@ -57,3 +57,18 @@ variable "min_size" {
   description = "Min number of instances."
   default     = 1
 }
+
+variable "domain_name" {
+  type        = string
+  description = "Domain name for the service."
+}
+
+variable "zone_id" {
+  type        = string
+  description = "Zone id of the created zone for the domain."
+}
+
+variable "log_bucket_domain" {
+  type        = string
+  description = "The name of the s3 bucket to write logs to."
+}

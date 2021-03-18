@@ -6,6 +6,10 @@ module "fea_container" {
   subnet_ids       = module.vpc.subnet_public_ids
   ecs_cluster_name = "fea-cluster"
 
+  domain_name       = "api.fea.barryli.ca"
+  zone_id           = module.logging.bucket_domain
+  log_bucket_domain = module.barryli_ca.zone_id
+
   instance_type    = "t2.micro"
   desired_capacity = 1
   max_size         = 1
@@ -20,4 +24,9 @@ module "fea_container" {
     "us-east-1c",
     "us-east-1d",
   ]
+
+  providers = {
+    aws.cert = aws.cert
+    aws.dns  = aws.dns
+  }
 }
