@@ -34,3 +34,8 @@ output "repository_url" {
   description = "Ecr repo url."
   value       = module.fea_container.repository_url
 }
+
+output "api_fea_domain_name" {
+  description = "Fea api service domain name."
+  value       = module.fea_container.domain_name
+}

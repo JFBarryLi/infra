@@ -35,6 +35,15 @@ resource "aws_autoscaling_group" "ecs" {
   health_check_grace_period = 600
   health_check_type         = "EC2"
 
+  target_group_arns = [aws_lb_target_group.this.arn]
+
+  instance_refresh {
+    strategy = "Rolling"
+    preferences {
+      min_healthy_percentage = 50
+    }
+  }
+
   lifecycle {
     create_before_destroy = true
   }

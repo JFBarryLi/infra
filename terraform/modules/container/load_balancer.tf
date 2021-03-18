@@ -28,7 +28,7 @@ resource "aws_lb_target_group" "this" {
   protocol = "HTTP"
   vpc_id   = var.vpc_id
 
-  load_balancing_algorithm_type = "least_outstanding_requests"
+  load_balancing_algorithm_type = "round_robin"
 
   stickiness {
     enabled = true

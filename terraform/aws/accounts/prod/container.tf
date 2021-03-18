@@ -7,8 +7,8 @@ module "fea_container" {
   ecs_cluster_name = "fea-cluster"
 
   domain_name       = "api.fea.barryli.ca"
-  zone_id           = module.logging.bucket_domain
-  log_bucket_domain = module.barryli_ca.zone_id
+  zone_id           = module.barryli_ca.zone_id
+  log_bucket_domain = module.logging.bucket_domain
 
   instance_type    = "t2.micro"
   desired_capacity = 1
