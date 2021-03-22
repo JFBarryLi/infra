@@ -25,22 +25,22 @@ resource "aws_iam_instance_profile" "ecs_agent" {
   role = aws_iam_role.ecs_agent.name
 }
 
-resource "aws_iam_user" "task_def" {
-  name          = "${var.ecs_cluster_name}-task_def"
+resource "aws_iam_user" "ecs_deployer" {
+  name          = "${var.ecs_cluster_name}-ecs_deployer"
   force_destroy = true
 }
 
-resource "aws_iam_access_key" "task_def" {
-  user = aws_iam_user.task_def.name
+resource "aws_iam_access_key" "ecs_deployer" {
+  user = aws_iam_user.ecs_deployer.name
 }
 
-resource "aws_iam_user_policy" "task_def" {
-  name   = "${var.ecs_cluster_name}-task_def"
-  user   = aws_iam_user.task_def.name
-  policy = data.aws_iam_policy_document.task_def.json
+resource "aws_iam_user_policy" "ecs_deployer" {
+  name   = "${var.ecs_cluster_name}-ecs_deployer"
+  user   = aws_iam_user.ecs_deployer.name
+  policy = data.aws_iam_policy_document.ecs_deployer.json
 }
 
-data "aws_iam_policy_document" "task_def" {
+data "aws_iam_policy_document" "ecs_deployer" {
   statement {
     sid    = "RegisterTaskDefinition"
     effect = "Allow"
@@ -77,7 +77,38 @@ data "aws_iam_policy_document" "task_def" {
     ]
 
     resources = [
-      "arn:aws:ecs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:service/${var.ecs_cluster_name}/${var.ecs_cluster_name}-service"
+      "arn:aws:ecs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:service/${var.ecs_cluster_name}/${var.ecs_cluster_name}-service",
+      "arn:aws:ecs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:service/default/${var.ecs_cluster_name}-service"
+    ]
+  }
+
+  statement {
+    sid    = "GetAuthorizationToken"
+    effect = "Allow"
+
+    actions = [
+      "ecr:GetAuthorizationToken"
+    ]
+
+    resources = ["*"]
+  }
+
+  statement {
+    sid    = "AllowPushPull"
+    effect = "Allow"
+
+    actions = [
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:PutImage",
+      "ecr:InitiateLayerUpload",
+      "ecr:UploadLayerPart",
+      "ecr:CompleteLayerUpload"
+    ]
+
+    resources = [
+      "arn:aws:ecr:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:repository/${var.repo_name}}"
     ]
   }
 }

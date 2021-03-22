@@ -46,13 +46,13 @@ resource "github_actions_secret" "ecr_repository_url" {
 resource "github_actions_secret" "ecs_agent_access_key" {
   repository      = github_repository.fea.name
   secret_name     = "AWS_ACCESS_KEY_ID"
-  plaintext_value = data.terraform_remote_state.prod.outputs.fea_task_def_access_key_id
+  plaintext_value = data.terraform_remote_state.prod.outputs.fea_ecs_deployer_access_key_id
 }
 
 resource "github_actions_secret" "ecs_agent_secret_key" {
   repository      = github_repository.fea.name
   secret_name     = "AWS_SECRET_ACCESS_KEY"
-  plaintext_value = data.terraform_remote_state.prod.outputs.fea_task_def_secret_access_key
+  plaintext_value = data.terraform_remote_state.prod.outputs.fea_ecs_deployer_secret_access_key
 }
 
 resource "github_actions_secret" "aws_region" {

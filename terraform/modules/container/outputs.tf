@@ -8,13 +8,13 @@ output "domain_name" {
   value       = var.domain_name
 }
 
-output "task_def_access_key_id" {
-  description = "The AWS access key id for the task definition."
-  value       = aws_iam_access_key.task_def.id
+output "ecs_deployer_access_key_id" {
+  description = "The AWS access key id for the ecs deployer."
+  value       = aws_iam_access_key.ecs_deployer.id
 }
 
-output "task_def_secret_access_key" {
-  description = "The AWS secret access key for managing the task definition."
-  value       = aws_iam_access_key.task_def.secret
+output "ecs_deployer_secret_access_key" {
+  description = "The AWS secret access key for managing the ecs deployer."
+  value       = aws_iam_access_key.ecs_deployer.secret
   sensitive   = true
 }

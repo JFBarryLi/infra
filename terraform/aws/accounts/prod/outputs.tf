@@ -50,13 +50,13 @@ output "api_fea_domain_name" {
   value       = module.fea_container.domain_name
 }
 
-output "fea_task_def_access_key_id" {
-  description = "The AWS access key id for the fea task definition."
-  value       = module.fea_container.task_def_access_key_id
+output "fea_ecs_deployer_access_key_id" {
+  description = "The AWS access key id for the fea ecs deployer."
+  value       = module.fea_container.ecs_deployer_access_key_id
 }
 
-output "fea_task_def_secret_access_key" {
-  description = "The AWS secret access key for the fea task definition."
-  value       = module.fea_container.task_def_secret_access_key
+output "fea_ecs_deployer_secret_access_key" {
+  description = "The AWS secret access key for the fea ecs deployer."
+  value       = module.fea_container.ecs_deployer_secret_access_key
   sensitive   = true
 }
