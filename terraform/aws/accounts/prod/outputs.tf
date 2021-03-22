@@ -1,3 +1,13 @@
+output "aws_region" {
+  description = "Aws region."
+  value       = data.aws_region.current.name
+}
+
+output "aws_account_id" {
+  description = "Aws account id."
+  value       = data.aws_caller_identity.current.account_id
+}
+
 output "barryli_name_servers" {
   description = "Nameservers of the created zone."
   value       = module.barryli_ca.name_servers
@@ -38,4 +48,15 @@ output "repository_url" {
 output "api_fea_domain_name" {
   description = "Fea api service domain name."
   value       = module.fea_container.domain_name
+}
+
+output "fea_task_def_access_key_id" {
+  description = "The AWS access key id for the fea task definition."
+  value       = module.fea_container.task_def_access_key_id
+}
+
+output "fea_task_def_secret_access_key" {
+  description = "The AWS secret access key for the fea task definition."
+  value       = module.fea_container.task_def_secret_access_key
+  sensitive   = true
 }

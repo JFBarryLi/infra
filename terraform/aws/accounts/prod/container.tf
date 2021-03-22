@@ -16,7 +16,7 @@ module "fea_container" {
   min_size         = 1
 
   container_name = "fea-app"
-  container_port = 80
+  container_port = "80"
 
   azs = [
     "us-east-1a",
