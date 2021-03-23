@@ -73,3 +73,9 @@ resource "github_actions_secret" "site_fea_bucket_region" {
   secret_name     = "S3_BUCKET_REGION"
   plaintext_value = data.terraform_remote_state.prod.outputs.site_fea_bucket_region
 }
+
+resource "github_actions_secret" "api_fea_domain_name" {
+  repository      = github_repository.fea_ui.name
+  secret_name     = "FEA_API_DOMAIN"
+  plaintext_value = data.terraform_remote_state.prod.outputs.api_fea_domain_name
+}
