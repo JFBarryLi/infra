@@ -11,9 +11,9 @@ module "fea_container" {
   log_bucket_domain = module.logging.bucket_domain
 
   instance_type    = "t2.micro"
-  desired_capacity = 1
   max_size         = 1
-  min_size         = 1
+  max_step_size    = 1
+  min_step_size    = 1
 
   container_name = "fea-app"
   container_port = "80"

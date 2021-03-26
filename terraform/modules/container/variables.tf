@@ -40,21 +40,21 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
-variable "desired_capacity" {
-  type        = string
-  description = "Desired number of instances."
-  default     = 1
-}
-
 variable "max_size" {
   type        = number
   description = "Max number of instances."
   default     = 1
 }
 
-variable "min_size" {
+variable "max_step_size" {
   type        = number
-  description = "Min number of instances."
+  description = "Max scaling step adjustment size."
+  default     = 1
+}
+
+variable "min_step_size" {
+  type        = number
+  description = "Min scaling step adjustment size."
   default     = 1
 }
 
