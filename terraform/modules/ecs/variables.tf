@@ -1,8 +1,3 @@
-variable "repo_name" {
-  type        = string
-  description = "Repository name."
-}
-
 variable "vpc_id" {
   type        = string
   description = "Vpc id."
@@ -16,17 +11,6 @@ variable "subnet_ids" {
 variable "ecs_cluster_name" {
   type        = string
   description = "Name for the ECS Cluster."
-}
-
-variable "container_name" {
-  type        = string
-  description = "Container name."
-}
-
-variable "container_port" {
-  type        = number
-  description = "Container port."
-  default     = 80
 }
 
 variable "azs" {
@@ -56,16 +40,6 @@ variable "min_step_size" {
   type        = number
   description = "Min scaling step adjustment size."
   default     = 1
-}
-
-variable "domain_name" {
-  type        = string
-  description = "Domain name for the service."
-}
-
-variable "zone_id" {
-  type        = string
-  description = "Zone id of the created zone for the domain."
 }
 
 variable "log_bucket_domain" {

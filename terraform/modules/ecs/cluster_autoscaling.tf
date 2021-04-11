@@ -35,8 +35,6 @@ resource "aws_autoscaling_group" "ecs" {
   health_check_type         = "EC2"
   protect_from_scale_in     = true
 
-  target_group_arns = [aws_lb_target_group.this.arn]
-
   instance_refresh {
     strategy = "Rolling"
     preferences {
