@@ -11,11 +11,4 @@ module "ecs" {
   max_size         = 1
   max_step_size    = 5
   min_step_size    = 1
-
-  azs = [
-    "us-east-1a",
-    "us-east-1b",
-    "us-east-1c",
-    "us-east-1d",
-  ]
 }

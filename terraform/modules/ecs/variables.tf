@@ -13,11 +13,6 @@ variable "ecs_cluster_name" {
   description = "Name for the ECS Cluster."
 }
 
-variable "azs" {
-  type        = list(string)
-  description = "Availability Zones for ecs placements."
-}
-
 variable "instance_type" {
   type        = string
   description = "EC2 instance type to use."
