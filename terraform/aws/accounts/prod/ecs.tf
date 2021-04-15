@@ -3,7 +3,8 @@ module "ecs" {
 
   vpc_id           = module.vpc.vpc_id
   subnet_ids       = module.vpc.subnet_public_ids
-  ecs_cluster_name = "prod-cluster"
+  ecs_cluster_name = "ecs-cluster"
+  environment      = "prod"
 
   log_bucket_domain = module.logging.bucket_domain
 

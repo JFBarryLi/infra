@@ -1,5 +1,5 @@
 resource "aws_ecs_cluster" "this" {
-  name  = var.ecs_cluster_name
+  name  = "${var.environment}-${var.ecs_cluster_name}"
 
   capacity_providers = [aws_ecs_capacity_provider.this.name]
 

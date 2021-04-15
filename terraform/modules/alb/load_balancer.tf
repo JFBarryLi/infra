@@ -1,9 +1,9 @@
 resource "aws_lb" "this" {
-  name = "${var.container_name}-lb"
+  name = "${environment}-${name}-alb"
 
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb.id]
-  subnets            = var.subnet_ids
+  subnets            =  var.subnet_ids
 
   enable_cross_zone_load_balancing = true
 }
@@ -39,9 +39,10 @@ resource "aws_lb_listener" "redirect" {
 }
 
 resource "aws_lb_target_group" "this" {
-  port     = var.container_port
-  protocol = "HTTP"
-  vpc_id   = var.vpc_id
+  port        = var.container_port
+  protocol    = "HTTP"
+  target_type = "ip"
+  vpc_id      =  var.vpc_id
 
   load_balancing_algorithm_type = "round_robin"
 

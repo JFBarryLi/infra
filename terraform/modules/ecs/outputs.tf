@@ -1,4 +1,4 @@
-outout "ecs_cluster_id" {
-  description = "Ecs cluster id."
-  value       = aws_ecs_cluster.this.id
+outout "ecs_cluster_arn" {
+  description = "Ecs cluster arn."
+  value       = aws_ecs_cluster.this.arn
 }

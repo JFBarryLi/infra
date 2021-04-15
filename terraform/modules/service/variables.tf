@@ -3,9 +3,44 @@ variable "service_name" {
   description = "Service name."
 }
 
-variable "ecs_cluster_id" {
+variable "environment" {
   type        = string
-  description = "Ecs cluster id."
+  description = "Environment name for the service."
+}
+
+variable "ecs_cluster_arn" {
+  type        = string
+  description = "Ecs cluster arn."
+}
+
+variable "vpc_id" {
+  type        = string
+  description = "Vpc id."
+}
+
+variable subnet_ids {
+  type        = list(string)
+  description = "List of subnets."
+}
+
+variable "desired_task_count" {
+  type        = number
+  description = "Desired number of tasks."
+}
+
+variable "lb_security_group_id" {
+  type        = string
+  description = "Load balancer security group id."
+}
+
+variable "target_group_arn" {
+  type        = string
+  description = "Load balancer target group arn."
+}
+
+variable "container_port" {
+  type        = number
+  description = "Container port."
 }
 
 variable "repo_names" {
