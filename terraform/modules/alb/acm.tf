@@ -1,7 +1,9 @@
 module "cert" {
+  for_each = var.targets
+
   source = "../acm-certificate"
 
-  domain_name = var.service_endpoint
+  domain_name = each.value.domain
 
   providers = {
     aws.cert = aws.cert

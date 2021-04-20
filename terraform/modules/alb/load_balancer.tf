@@ -17,8 +17,11 @@ resource "aws_lb_listener" "this" {
   certificate_arn = module.cert.certificate_arn
 
   default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.this.arn
+    type = "forward"
+    forward {
+      target_group_arn {
+      }
+    }
   }
 }
 
@@ -39,7 +42,10 @@ resource "aws_lb_listener" "redirect" {
 }
 
 resource "aws_lb_target_group" "this" {
-  port        = var.container_port
+  for_each = var.targets
+
+  name        = each.value.domain
+  port        = each.value.port
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      =  var.vpc_id
@@ -57,5 +63,23 @@ resource "aws_lb_target_group" "this" {
 
   lifecycle {
     create_before_destroy = true
+  }
+}
+
+resource "aws_alb_listener_rule" "this" {
+  for_each = var.targets
+
+  listener_arn = aws_lb_listener.this.arn
+  priority     = 1
+
+  action {
+    type
+    target_group_arn = aws_lb_target_group.targets[each.key].arn
+  }
+
+  condition {
+    host_header {
+      values = [each.value.domain]
+    }
   }
 }
