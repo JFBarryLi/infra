@@ -1,5 +1,5 @@
 resource "aws_lb" "this" {
-  name = "${environment}-${name}-alb"
+  name = "${var.environment}-alb"
 
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb.id]
@@ -14,15 +14,17 @@ resource "aws_lb_listener" "this" {
   protocol          = "HTTPS"
 
   ssl_policy      = "ELBSecurityPolicy-2016-08"
-  certificate_arn = module.cert.certificate_arn
 
   default_action {
     type = "forward"
-    forward {
-      target_group_arn {
-      }
-    }
   }
+}
+
+resource "aws_lb_listener_certificate" "this" {
+  for_each = module.cert
+
+  listener_arn    = aws_lb_listener.this.arn
+  certificate_arn = each.value.certificate_arn
 }
 
 resource "aws_lb_listener" "redirect" {
@@ -44,7 +46,6 @@ resource "aws_lb_listener" "redirect" {
 resource "aws_lb_target_group" "this" {
   for_each = var.targets
 
-  name        = each.value.domain
   port        = each.value.port
   protocol    = "HTTP"
   target_type = "ip"
@@ -73,8 +74,8 @@ resource "aws_alb_listener_rule" "this" {
   priority     = 1
 
   action {
-    type
-    target_group_arn = aws_lb_target_group.targets[each.key].arn
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.this[each.key].arn
   }
 
   condition {

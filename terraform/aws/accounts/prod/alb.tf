@@ -12,4 +12,9 @@ module "alb" {
       port   = 80
     }
   }
+
+  providers = {
+    aws.cert = aws.cert
+    aws.dns  = aws.dns
+  }
 }
