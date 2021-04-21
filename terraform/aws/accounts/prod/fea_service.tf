@@ -18,11 +18,4 @@ module "fea_service" {
   var.task_desired_count = 1
   var.task_max_percent   = 100
   var.task_min_percent   = 0
-
-  log_bucket_domain = module.logging.bucket_domain
-
-  providers = {
-    aws.cert = aws.cert
-    aws.dns  = aws.dns
-  }
 }
