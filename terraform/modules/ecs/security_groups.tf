@@ -1,5 +1,5 @@
 resource "aws_security_group" "ecs" {
-  name   = "${var.service_name}-${var.environment}-ecs-sg"
+  name   = "$${var.environment}-${var.ecs_cluster_name}-ecs-sg"
   vpc_id = var.vpc_id
 }
 

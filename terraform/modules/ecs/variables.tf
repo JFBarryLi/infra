@@ -42,6 +42,11 @@ variable "min_step_size" {
   default     = 1
 }
 
+variable "lb_security_group_id" {
+  type        = string
+  description = "Load balancer security group id."
+}
+
 variable "log_bucket_domain" {
   type        = string
   description = "The name of the s3 bucket to write logs to."
