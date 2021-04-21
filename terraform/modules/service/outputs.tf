@@ -1,11 +1,6 @@
 output "repository_urls" {
   description = "Ecr repo urls."
-  value       = aws_ecr_repository.this.*.repository_url
-}
-
-output "service_endpoint" {
-  description = "Domain name to access the service."
-  value       = var.service_endpoint
+  value       = {for k, v in aws_ecr_repository.this k => v.repository_url}
 }
 
 output "service_deployer_access_key_id" {

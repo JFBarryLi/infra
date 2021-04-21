@@ -6,7 +6,7 @@
     ],
     "portMappings": [
       {
-        "hostPort": 80,
+        "hostPort": 0,
         "protocol": "tcp",
         "containerPort": 80
       }
@@ -17,7 +17,7 @@
     "cpu": 10,
     "memory": 300,
     "image": "httpd:2.4",
-    "name": "placeholder",
+    "name": "${container_name}",
     "essential": true
   }
 ]

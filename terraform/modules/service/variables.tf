@@ -13,24 +13,19 @@ variable "ecs_cluster_arn" {
   description = "Ecs cluster arn."
 }
 
-variable "vpc_id" {
-  type        = string
-  description = "Vpc id."
-}
-
-variable subnet_ids {
-  type        = list(string)
-  description = "List of subnets."
-}
-
-variable "desired_task_count" {
+variable "task_desired_count" {
   type        = number
   description = "Desired number of tasks."
 }
 
-variable "lb_security_group_id" {
-  type        = string
-  description = "Load balancer security group id."
+variable "task_max_percent" {
+  type        = number
+  description = "Maximum percent healthy for the task."
+}
+
+variable "task_min_percent" {
+  type        = number
+  description = "Minimum percent healthy for the task."
 }
 
 variable "target_group_arn" {
@@ -38,27 +33,19 @@ variable "target_group_arn" {
   description = "Load balancer target group arn."
 }
 
-variable "container_port" {
+variable "lb_container_name" {
+  type        = string
+  description = "Container name for the alb to connect to."
+}
+
+variable "lb_container_port" {
   type        = number
-  description = "Container port."
+  description = "Container port for the alb to connect to."
 }
 
 variable "repo_names" {
-  type        = list(string)
+  type = map(object({
+    name = string
+  }))
   description = "Repository names."
-}
-
-variable "service_endpoint" {
-  type        = string
-  description = "Domain name for the service."
-}
-
-variable "zone_id" {
-  type        = string
-  description = "Zone id of the created zone for the service endpoint."
-}
-
-variable "log_bucket_domain" {
-  type        = string
-  description = "The name of the s3 bucket to write logs to."
 }

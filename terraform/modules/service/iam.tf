@@ -77,6 +77,6 @@ data "aws_iam_policy_document" "service_deployer" {
       "ecr:CompleteLayerUpload"
     ]
 
-    resources = aws_ecr_reposition.*.arn
+    resources = [for k, v in aws_ecr_repository.this : v.arn]
   }
 }

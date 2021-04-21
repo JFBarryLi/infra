@@ -48,7 +48,7 @@ resource "aws_lb_target_group" "this" {
 
   port        = each.value.port
   protocol    = "HTTP"
-  target_type = "ip"
+  target_type = "instance"
   vpc_id      =  var.vpc_id
 
   load_balancing_algorithm_type = "round_robin"
