@@ -16,7 +16,8 @@ resource "aws_lb_listener" "this" {
   ssl_policy      = "ELBSecurityPolicy-2016-08"
 
   default_action {
-    type = "forward"
+    type             = "forward"
+    target_group_arn = values(aws_lb_target_group.this)[0].arn
   }
 }
 

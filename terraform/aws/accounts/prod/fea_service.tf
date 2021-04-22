@@ -1,9 +1,10 @@
 module "fea_service" {
   source = "../../../modules/service"
 
+  environment  = "prod"
   service_name = "fea-app"
 
-  ecs_cluster_id = module.ecs.ecs_cluster_id
+  ecs_cluster_arn = module.ecs.ecs_cluster_arn
 
   lb_container_name = "fea-app"
   lb_container_port = 80
@@ -15,7 +16,7 @@ module "fea_service" {
     }
   }
 
-  var.task_desired_count = 1
-  var.task_max_percent   = 100
-  var.task_min_percent   = 0
+  task_desired_count = 1
+  task_max_percent   = 100
+  task_min_percent   = 0
 }

@@ -3,6 +3,11 @@ output "target_groups" {
   value       = {for k, v in aws_lb_target_group.this : k => v.arn}
 }
 
+output "endpoints" {
+  description = "Map of the endpoints."
+  value       = {for k, v in aws_route53_record.alias : k => v.name}
+}
+
 output "lb_security_group_id" {
   description = "Lb security group id."
   value = aws_security_group.alb.id

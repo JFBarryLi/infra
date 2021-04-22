@@ -8,7 +8,7 @@ data "template_file" "container_definitions" {
 
 resource "aws_ecs_task_definition" "this" {
   family                = var.service_name
-  network_mode          = "birdge"
+  network_mode          = "bridge"
   container_definitions = data.template_file.container_definitions.rendered
 }
 
@@ -19,7 +19,7 @@ data "aws_ecs_task_definition" "this" {
 
 resource "aws_ecs_service" "this" {
   name            = var.service_name
-  cluster         = var.ecs_cluster.id
+  cluster         = var.ecs_cluster_arn
   task_definition = "${aws_ecs_task_definition.this.family}:${max(
     aws_ecs_task_definition.this.revision,
     data.aws_ecs_task_definition.this.revision,
