@@ -77,5 +77,5 @@ resource "github_actions_secret" "site_fea_bucket_region" {
 resource "github_actions_secret" "api_fea_domain_name" {
   repository      = github_repository.fea_ui.name
   secret_name     = "FEA_API_DOMAIN"
-  plaintext_value = data.terraform_remote_state.prod.outputs.api_fea_domain_name
+  plaintext_value = data.terraform_remote_state.prod.outputs.api_fea_service_endpoint
 }

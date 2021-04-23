@@ -1,5 +1,7 @@
 resource "aws_ecr_repository" "this" {
-  name                 = var.repo_name
+  for_each = var.repo_names
+
+  name                 = each.value.name
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -7,13 +9,15 @@ resource "aws_ecr_repository" "this" {
   }
 
   tags = {
-    Name      = var.repo_name
+    Name      = each.value.name
     ManagedBy = "terraform"
   }
 }
 
 resource "aws_ecr_repository_policy" "this" {
-  repository = aws_ecr_repository.this.name
+  for_each = var.repo_names
+
+  repository = aws_ecr_repository.this[each.key].name
 
   policy = <<EOF
 {
@@ -39,7 +43,9 @@ EOF
 }
 
 resource "aws_ecr_lifecycle_policy" "this" {
-  repository = aws_ecr_repository.this.name
+  for_each = var.repo_names
+
+  repository = aws_ecr_repository.this[each.key].name
 
   policy = <<EOF
 {
