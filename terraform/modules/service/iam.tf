@@ -35,7 +35,7 @@ data "aws_iam_policy_document" "service_deployer" {
       "iam:PassRole"
     ]
 
-    resources = []
+    resources = ["*"]
   }
 
   statement {
@@ -77,6 +77,6 @@ data "aws_iam_policy_document" "service_deployer" {
       "ecr:CompleteLayerUpload"
     ]
 
-    resources = [for k, v in aws_ecr_repository.this : v.arn]
+    resources = [for repo in aws_ecr_repository.this : repo.arn]
   }
 }
