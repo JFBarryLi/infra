@@ -15,7 +15,7 @@ resource "aws_launch_configuration" "ecs" {
   instance_type        = var.instance_type
   user_data            = <<EOF
 #!/bin/bash
-echo ECS_CLUSTER=${var.ecs_cluster_name} >> /etc/ecs/ecs.config
+echo ECS_CLUSTER=${var.environment}-${var.ecs_cluster_name} >> /etc/ecs/ecs.config
 echo 'ECS_DISABLE_PRIVILEGED=true' >> /etc/ecs/ecs.config
 EOF
 
@@ -25,7 +25,7 @@ EOF
 }
 
 resource "aws_autoscaling_group" "ecs" {
-  name                      = "${var.ecs_cluster_name}-asg"
+  name                      = "${var.environment}-${var.ecs_cluster_name}-asg"
   vpc_zone_identifier       = var.subnet_ids
   launch_configuration      = aws_launch_configuration.ecs.name
 
@@ -54,7 +54,7 @@ resource "aws_autoscaling_group" "ecs" {
 }
 
 resource "aws_ecs_capacity_provider" "this" {
-  name =  "${var.ecs_cluster_name}-ecs_capacity_provider"
+  name =  "${var.environment}-${var.ecs_cluster_name}-ecs_capacity_provider"
 
   auto_scaling_group_provider {
     auto_scaling_group_arn         = aws_autoscaling_group.ecs.arn
