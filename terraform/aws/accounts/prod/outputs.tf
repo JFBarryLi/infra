@@ -55,7 +55,7 @@ output "fea_service_deployer_access_key_id" {
   value       = module.fea_service.service_deployer_access_key_id
 }
 
-output "fea_service_secret_access_key" {
+output "fea_service_deployer_secret_access_key" {
   description = "The AWS secret access key for the fea service deployer."
   value       = module.fea_service.service_deployer_secret_access_key
   sensitive   = true
