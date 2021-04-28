@@ -1,0 +1,26 @@
+name: security
+
+on:
+  pull_request:
+    branches:
+      - '*'
+  push:
+    branches:
+      - main
+
+jobs:
+  checkov:
+    runs-on: ubuntu-latest
+    name: checkov
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@main
+
+      - name: Run Checkov action
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: terraform/aws/accounts/prod/
+          framework: terraform
+          output_format: github_failed_only
+          download_external_modules: true
