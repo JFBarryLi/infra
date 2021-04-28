@@ -3,7 +3,7 @@ name: security
 on:
   pull_request:
     branches:
-      - '*'
+      - main
   push:
     branches:
       - main
@@ -22,5 +22,5 @@ jobs:
         with:
           directory: terraform/aws/accounts/prod/
           framework: terraform
-          output_format: github_failed_only
+          output_format: json
           download_external_modules: true
