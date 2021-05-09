@@ -18,8 +18,8 @@ data "aws_ecs_task_definition" "this" {
 }
 
 resource "aws_ecs_service" "this" {
-  name            = var.service_name
-  cluster         = var.ecs_cluster_arn
+  name    = var.service_name
+  cluster = var.ecs_cluster_arn
   task_definition = "${aws_ecs_task_definition.this.family}:${max(
     aws_ecs_task_definition.this.revision,
     data.aws_ecs_task_definition.this.revision,
@@ -31,7 +31,7 @@ resource "aws_ecs_service" "this" {
 
   load_balancer {
     target_group_arn = var.target_group_arn
-    container_name = var.lb_container_name
-    container_port = var.lb_container_port
+    container_name   = var.lb_container_name
+    container_port   = var.lb_container_port
   }
 }

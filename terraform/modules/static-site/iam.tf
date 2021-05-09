@@ -14,9 +14,9 @@ resource "aws_iam_access_key" "deployer" {
 }
 
 resource "aws_iam_user_policy" "deployer" {
-  name        = "${var.domain_name}-deployer"
-  user        = aws_iam_user.deployer.name
-  policy      = data.aws_iam_policy_document.deployer.json
+  name   = "${var.domain_name}-deployer"
+  user   = aws_iam_user.deployer.name
+  policy = data.aws_iam_policy_document.deployer.json
 }
 
 data "aws_iam_policy_document" "deployer" {

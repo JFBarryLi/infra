@@ -1,6 +1,6 @@
 output "repository_urls" {
   description = "Ecr repo urls."
-  value       = {for k, v in aws_ecr_repository.this : k => v.repository_url}
+  value       = { for k, v in aws_ecr_repository.this : k => v.repository_url }
 }
 
 output "service_deployer_access_key_id" {

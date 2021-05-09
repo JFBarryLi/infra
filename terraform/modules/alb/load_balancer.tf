@@ -3,7 +3,7 @@ resource "aws_lb" "this" {
 
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb.id]
-  subnets            =  var.subnet_ids
+  subnets            = var.subnet_ids
 
   enable_cross_zone_load_balancing = true
 }
@@ -50,7 +50,7 @@ resource "aws_lb_target_group" "this" {
   port        = each.value.port
   protocol    = "HTTP"
   target_type = "instance"
-  vpc_id      =  var.vpc_id
+  vpc_id      = var.vpc_id
 
   load_balancing_algorithm_type = "round_robin"
 
