@@ -46,7 +46,7 @@ No inputs.
 | <a name="output_fea_service_deployer_secret_access_key"></a> [fea\_service\_deployer\_secret\_access\_key](#output\_fea\_service\_deployer\_secret\_access\_key) | The AWS secret access key for the fea service deployer. |
 | <a name="output_repository_urls"></a> [repository\_urls](#output\_repository\_urls) | Ecr repo urls. |
 | <a name="output_site_fea_bucket_name"></a> [site\_fea\_bucket\_name](#output\_site\_fea\_bucket\_name) | Fea site bucket name. |
-| <a name="output_site_fea_bucket_region"></a> [site\_fea\_bucket\_region](#output\_site\_fea\_bucket\_region) | Fea site bucket region/ |
+| <a name="output_site_fea_bucket_region"></a> [site\_fea\_bucket\_region](#output\_site\_fea\_bucket\_region) | Fea site bucket region. |
 | <a name="output_site_fea_cf_distribution_id"></a> [site\_fea\_cf\_distribution\_id](#output\_site\_fea\_cf\_distribution\_id) | Fea cloudfront distribution\_id. |
 | <a name="output_site_fea_deployer_access_key_id"></a> [site\_fea\_deployer\_access\_key\_id](#output\_site\_fea\_deployer\_access\_key\_id) | The AWS access key id that can deploy to the site. |
 | <a name="output_site_fea_deployer_secret_access_key"></a> [site\_fea\_deployer\_secret\_access\_key](#output\_site\_fea\_deployer\_secret\_access\_key) | The AWS secret access key that can deploy to the site. |

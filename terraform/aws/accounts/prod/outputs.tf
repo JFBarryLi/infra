@@ -36,7 +36,7 @@ output "site_fea_bucket_name" {
 }
 
 output "site_fea_bucket_region" {
-  description = "Fea site bucket region/"
+  description = "Fea site bucket region."
   value       = module.fea_site.bucket_region
 }
 
