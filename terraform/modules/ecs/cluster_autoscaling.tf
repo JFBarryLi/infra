@@ -25,9 +25,9 @@ EOF
 }
 
 resource "aws_autoscaling_group" "ecs" {
-  name                      = "${var.environment}-${var.ecs_cluster_name}-asg"
-  vpc_zone_identifier       = var.subnet_ids
-  launch_configuration      = aws_launch_configuration.ecs.name
+  name                 = "${var.environment}-${var.ecs_cluster_name}-asg"
+  vpc_zone_identifier  = var.subnet_ids
+  launch_configuration = aws_launch_configuration.ecs.name
 
   min_size                  = 0
   max_size                  = var.max_size
@@ -54,7 +54,7 @@ resource "aws_autoscaling_group" "ecs" {
 }
 
 resource "aws_ecs_capacity_provider" "this" {
-  name =  "${var.environment}-${var.ecs_cluster_name}-ecs_capacity_provider"
+  name = "${var.environment}-${var.ecs_cluster_name}-ecs_capacity_provider"
 
   auto_scaling_group_provider {
     auto_scaling_group_arn         = aws_autoscaling_group.ecs.arn

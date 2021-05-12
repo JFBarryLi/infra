@@ -22,7 +22,7 @@ resource "github_branch" "fea_ui" {
   branch     = "master"
 }
 
-resource "github_branch_default" "fea_ui"{
+resource "github_branch_default" "fea_ui" {
   repository = github_repository.fea_ui.name
   branch     = github_branch.fea_ui.branch
 }
@@ -37,7 +37,7 @@ resource "github_branch_protection" "fea_ui" {
   require_signed_commits = false
 
   required_status_checks {
-    strict   = false
+    strict = false
     contexts = [
       "build (13.x)",
     ]

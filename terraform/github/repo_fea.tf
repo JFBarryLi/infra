@@ -22,7 +22,7 @@ resource "github_branch" "fea" {
   branch     = "master"
 }
 
-resource "github_branch_default" "fea"{
+resource "github_branch_default" "fea" {
   repository = github_repository.fea.name
   branch     = github_branch.fea.branch
 }
