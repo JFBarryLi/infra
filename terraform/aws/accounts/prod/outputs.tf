@@ -70,3 +70,24 @@ output "fea_service_awslogs_group_name" {
   description = "Fea service awslogs group name."
   value       = module.fea_service.awslogs_group_name
 }
+
+output "ova_service_deployer_access_key_id" {
+  description = "The AWS access key id for the ova service deployer."
+  value       = module.ova_service.service_deployer_access_key_id
+}
+
+output "ova_service_deployer_secret_access_key" {
+  description = "The AWS secret access key for the ova service deployer."
+  value       = module.ova_service.service_deployer_secret_access_key
+  sensitive   = true
+}
+
+output "ova_service_task_role_arn" {
+  description = "Ova service default task IAM role arn."
+  value       = module.ova_service.task_role_arn
+}
+
+output "ova_service_awslogs_group_name" {
+  description = "Ova bot awslogs group name."
+  value       = module.ova_service.awslogs_group_name
+}
