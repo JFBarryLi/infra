@@ -21,6 +21,7 @@ No requirements.
 | <a name="module_fea_service"></a> [fea\_service](#module\_fea\_service) | ../../../modules/service |  |
 | <a name="module_fea_site"></a> [fea\_site](#module\_fea\_site) | ../../../modules/static-site |  |
 | <a name="module_logging"></a> [logging](#module\_logging) | ../../../modules/logging |  |
+| <a name="module_ova_service"></a> [ova\_service](#module\_ova\_service) | ../../../modules/service |  |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | ../../../modules/vpc |  |
 
 ## Resources
@@ -42,8 +43,14 @@ No inputs.
 | <a name="output_aws_account_id"></a> [aws\_account\_id](#output\_aws\_account\_id) | Aws account id. |
 | <a name="output_aws_region"></a> [aws\_region](#output\_aws\_region) | Aws region. |
 | <a name="output_barryli_name_servers"></a> [barryli\_name\_servers](#output\_barryli\_name\_servers) | Nameservers of the created zone. |
+| <a name="output_fea_service_awslogs_group_name"></a> [fea\_service\_awslogs\_group\_name](#output\_fea\_service\_awslogs\_group\_name) | Fea service awslogs group name. |
 | <a name="output_fea_service_deployer_access_key_id"></a> [fea\_service\_deployer\_access\_key\_id](#output\_fea\_service\_deployer\_access\_key\_id) | The AWS access key id for the fea service deployer. |
 | <a name="output_fea_service_deployer_secret_access_key"></a> [fea\_service\_deployer\_secret\_access\_key](#output\_fea\_service\_deployer\_secret\_access\_key) | The AWS secret access key for the fea service deployer. |
+| <a name="output_fea_service_task_role_arn"></a> [fea\_service\_task\_role\_arn](#output\_fea\_service\_task\_role\_arn) | Fea service default task IAM role arn. |
+| <a name="output_ova_service_awslogs_group_name"></a> [ova\_service\_awslogs\_group\_name](#output\_ova\_service\_awslogs\_group\_name) | Ova bot awslogs group name. |
+| <a name="output_ova_service_deployer_access_key_id"></a> [ova\_service\_deployer\_access\_key\_id](#output\_ova\_service\_deployer\_access\_key\_id) | The AWS access key id for the ova service deployer. |
+| <a name="output_ova_service_deployer_secret_access_key"></a> [ova\_service\_deployer\_secret\_access\_key](#output\_ova\_service\_deployer\_secret\_access\_key) | The AWS secret access key for the ova service deployer. |
+| <a name="output_ova_service_task_role_arn"></a> [ova\_service\_task\_role\_arn](#output\_ova\_service\_task\_role\_arn) | Ova service default task IAM role arn. |
 | <a name="output_repository_urls"></a> [repository\_urls](#output\_repository\_urls) | Ecr repo urls. |
 | <a name="output_site_fea_bucket_name"></a> [site\_fea\_bucket\_name](#output\_site\_fea\_bucket\_name) | Fea site bucket name. |
 | <a name="output_site_fea_bucket_region"></a> [site\_fea\_bucket\_region](#output\_site\_fea\_bucket\_region) | Fea site bucket region. |
