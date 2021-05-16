@@ -28,19 +28,23 @@ variable "task_min_percent" {
   description = "Minimum percent healthy for the task."
 }
 
-variable "target_group_arn" {
-  type        = string
-  description = "Load balancer target group arn."
+variable "lb_enabled" {
+  type        = bool
+  default     = false
+  description = "Flag to determine whether or not to use a load balancer."
 }
 
-variable "lb_container_name" {
-  type        = string
-  description = "Container name for the alb to connect to."
-}
-
-variable "lb_container_port" {
-  type        = number
-  description = "Container port for the alb to connect to."
+variable "target_groups" {
+  default = []
+  type = list(
+    object({
+      container_name   = string
+      container_port   = number
+      target_group_arn = string
+      }
+    )
+  )
+  description = "List of target groups, with their respective container name, port and target group arn."
 }
 
 variable "repo_names" {

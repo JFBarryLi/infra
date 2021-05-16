@@ -1,22 +1,22 @@
-module "fea_service" {
+module "ova_service" {
   source = "../../../modules/service"
 
   environment  = "prod"
-  service_name = "fea-app"
+  service_name = "ova-bot"
 
   ecs_cluster_arn = module.ecs.ecs_cluster_arn
 
-  lb_enabled = true
+  lb_enabled = false
 
   target_groups = [{
-    container_name   = "fea-app"
-    container_port   = 80
-    target_group_arn = module.alb.target_groups["api_fea"]
+    container_name   = "ova-bot"
+    container_port   = 0
+    target_group_arn = ""
   }]
 
   repo_names = {
     api_fea = {
-      name = "fea-app"
+      name = "ova-bot"
     }
   }
 

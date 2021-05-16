@@ -13,3 +13,13 @@ output "service_deployer_secret_access_key" {
   value       = aws_iam_access_key.service_deployer.secret
   sensitive   = true
 }
+
+output "task_role_arn" {
+  description = "Default task IAM role arn."
+  value       = aws_iam_role.task_role.arn
+}
+
+output "awslogs_group_name" {
+  description = "Awslogs group name."
+  value       = aws_cloudwatch_log_group.this.name
+}
