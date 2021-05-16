@@ -55,25 +55,25 @@ resource "github_actions_secret" "fea_service_deployer_secret_key" {
   plaintext_value = data.terraform_remote_state.prod.outputs.fea_service_deployer_secret_access_key
 }
 
-resource "github_actions_secret" "task_role_arn" {
+resource "github_actions_secret" "fea_service_task_role_arn" {
   repository      = github_repository.fea.name
   secret_name     = "TASK_ROLE_ARN"
   plaintext_value = data.terraform_remote_state.prod.outputs.fea_service_task_role_arn
 }
 
-resource "github_actions_secret" "awslogs_group_name" {
+resource "github_actions_secret" "fea_service_awslogs_group_name" {
   repository      = github_repository.fea.name
   secret_name     = "AWSLOGS_GROUP_NAME"
   plaintext_value = data.terraform_remote_state.prod.outputs.fea_service_awslogs_group_name
 }
 
-resource "github_actions_secret" "aws_region" {
+resource "github_actions_secret" "fea_service_aws_region" {
   repository      = github_repository.fea.name
   secret_name     = "AWS_REGION"
   plaintext_value = data.terraform_remote_state.prod.outputs.aws_region
 }
 
-resource "github_actions_secret" "aws_account_id" {
+resource "github_actions_secret" "fea_service_aws_account_id" {
   repository      = github_repository.fea.name
   secret_name     = "AWS_ACCOUNT_ID"
   plaintext_value = data.terraform_remote_state.prod.outputs.aws_account_id
