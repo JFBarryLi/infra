@@ -60,3 +60,13 @@ output "fea_service_deployer_secret_access_key" {
   value       = module.fea_service.service_deployer_secret_access_key
   sensitive   = true
 }
+
+output "fea_service_task_role_arn" {
+  description = "Fea service default task IAM role arn."
+  value       = module.fea_service.task_role_arn
+}
+
+output "fea_service_awslogs_group_name" {
+  description = "Fea service awslogs group name."
+  value       = module.fea_service.awslogs_group_name
+}

@@ -17,6 +17,7 @@ resource "aws_launch_configuration" "ecs" {
 #!/bin/bash
 echo ECS_CLUSTER=${var.environment}-${var.ecs_cluster_name} >> /etc/ecs/ecs.config
 echo 'ECS_DISABLE_PRIVILEGED=true' >> /etc/ecs/ecs.config
+echo 'ECS_ENABLE_TASK_IAM_ROLE=true' >> /etc/ecs/ecs.config
 EOF
 
   lifecycle {
