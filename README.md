@@ -7,10 +7,12 @@ Infrastructure to support my personal projects.
 
 ### Finite Element Analysis Ui
 [Github](https://github.com/JFBarryLi/fea-ui)
+
 [Demo](http://fea.barryli.ca/)
 
 ### Finite Element Analysis Api
 [Github](https://github.com/JFBarryLi/fea-ui)
+
 [Demo](https://api.fea.barryli.ca/)
 
 ### Ontario Vaccine Alert
