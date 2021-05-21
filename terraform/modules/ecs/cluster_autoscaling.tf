@@ -20,6 +20,10 @@ echo 'ECS_DISABLE_PRIVILEGED=true' >> /etc/ecs/ecs.config
 echo 'ECS_ENABLE_TASK_IAM_ROLE=true' >> /etc/ecs/ecs.config
 EOF
 
+  root_block_device {
+    encrypted = true
+  }
+
   lifecycle {
     create_before_destroy = true
   }
