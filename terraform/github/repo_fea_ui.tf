@@ -3,7 +3,7 @@ resource "github_repository" "fea_ui" {
   description  = "Finite Element Analysis Demo App."
   homepage_url = "https://fea.barryli.ca"
 
-  visibility             = "private"
+  visibility             = "public"
   delete_branch_on_merge = true
   has_issues             = true
   has_wiki               = true

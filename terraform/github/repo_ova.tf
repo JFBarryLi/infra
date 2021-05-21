@@ -3,7 +3,7 @@ resource "github_repository" "ova" {
   description  = "Ontario Vaccine Alert Discord bot."
   homepage_url = ""
 
-  visibility             = "private"
+  visibility             = "public"
   delete_branch_on_merge = true
   has_issues             = true
   has_wiki               = true
