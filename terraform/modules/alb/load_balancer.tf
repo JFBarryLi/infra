@@ -5,14 +5,22 @@ resource "aws_lb" "this" {
   security_groups    = [aws_security_group.alb.id]
   subnets            = var.subnet_ids
 
+  drop_invalid_header_fields       = true
+  enable_deletion_protection       = true
   enable_cross_zone_load_balancing = true
+
+  access_logs {
+    bucket  = var.log_bucket_name
+    prefix  = "${var.environment}-alb"
+    enabled = true
+  }
 }
 
 resource "aws_lb_listener" "this" {
   load_balancer_arn = aws_lb.this.arn
   port              = 443
   protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  ssl_policy        = "ELBSecurityPolicy-TLS-1-2-2017-01"
   certificate_arn   = values(module.cert)[0].certificate_arn
 
   default_action {
