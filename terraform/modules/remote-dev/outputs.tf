@@ -1,4 +1,4 @@
 output "public_ip" {
   description = "Public ip address of the remote dev machine."
-  value       = aws_instance.this.public_ip
+  value       = var.ec2_on ? aws_instance.this[0].public_ip : null
 }
