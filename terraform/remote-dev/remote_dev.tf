@@ -1,7 +1,7 @@
 module "rd" {
   source = "../modules/remote-dev"
 
-  ec2_on        = "0"
-  ami           = "ami-089b5711e63812c2a"
+  ec2_on        = "1"
   instance_type = "t2.micro"
+  key_name      = "remote_dev"
 }
