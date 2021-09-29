@@ -5,15 +5,7 @@ resource "aws_lb" "this" {
   security_groups    = [aws_security_group.alb.id]
   subnets            = var.subnet_ids
 
-  drop_invalid_header_fields       = true
-  enable_deletion_protection       = true
   enable_cross_zone_load_balancing = true
-
-  access_logs {
-    bucket  = var.log_bucket_name
-    prefix  = "${var.environment}-alb"
-    enabled = true
-  }
 }
 
 resource "aws_lb_listener" "this" {

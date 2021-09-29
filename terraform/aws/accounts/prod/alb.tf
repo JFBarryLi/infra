@@ -6,8 +6,6 @@ module "alb" {
   zone_id     = module.barryli_ca.zone_id
   environment = "prod"
 
-  log_bucket_name = module.logging.bucket_name
-
   targets = {
     api_fea = {
       domain = "api.fea.barryli.ca"

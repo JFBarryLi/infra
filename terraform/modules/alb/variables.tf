@@ -18,11 +18,6 @@ variable "zone_id" {
   description = "Zone id."
 }
 
-variable "log_bucket_name" {
-  type        = string
-  description = "Log bucket name."
-}
-
 variable "targets" {
   type = map(object({
     domain = string
