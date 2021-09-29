@@ -1,0 +1,35 @@
+name: remote_dev
+
+on:
+  workflow_dispatch:
+    inputs:
+      region:
+        description: 'AWS Region'
+        required: true
+        default: 'us-east-1'
+      ec2_on:
+        description: 'EC2 On/Off Switch'
+        required: true
+        default: '0'
+      instance_type:
+        description: 'EC2 Instance Type'
+        required: true
+        default: 't2.micro'
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    name: Apply Terraform Plan
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Terraform apply
+        uses: dflook/terraform-apply@v1
+        with:
+          path: terraform/remote-dev
+          auto_approve: true
+          variables: |
+            ec2_on = "${{ github.event.inputs.ec2_on }}"
+            region = "${{ github.event.inputs.region }}"
+            instance_type = "${{ github.event.inputs.instance_type }}"
