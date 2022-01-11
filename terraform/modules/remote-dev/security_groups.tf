@@ -1,5 +1,5 @@
 resource "aws_security_group" "ec2" {
-  name = "rmeote-dev-ec2"  
+  name = "remote-dev-ec2"  
 
   egress = [
     {
