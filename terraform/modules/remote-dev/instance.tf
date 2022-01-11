@@ -19,6 +19,7 @@ data "template_file" "mount_efs" {
 
   vars = {
     efs_id = aws_efs_file_system.this.id
+    region = data.aws_region.current.name
   }
 
   depends_on = [
