@@ -11,7 +11,7 @@ module "ecs" {
   log_bucket_domain = module.logging.bucket_domain
 
   instance_type = "t2.micro"
-  max_size      = 1
+  max_size      = 0
   max_step_size = 5
   min_step_size = 1
 }
