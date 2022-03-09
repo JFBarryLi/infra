@@ -91,3 +91,30 @@ output "ova_service_awslogs_group_name" {
   description = "Ova bot awslogs group name."
   value       = module.ova_service.awslogs_group_name
 }
+
+output "site_barryli_deployer_access_key_id" {
+  description = "The AWS access key id that can deploy to the site."
+  value       = module.barryli_site.deployer_access_key_id
+}
+
+output "site_barryli_deployer_secret_access_key" {
+  description = "The AWS secret access key that can deploy to the site."
+  value       = module.barryli_site.deployer_secret_access_key
+  sensitive   = true
+}
+
+output "site_barryli_cf_distribution_id" {
+  description = "Barryli cloudfront distribution_id."
+  value       = module.barryli_site.distribution_id
+  sensitive   = true
+}
+
+output "site_barryli_bucket_name" {
+  description = "Barryli site bucket name."
+  value       = module.barryli_site.bucket_name
+}
+
+output "site_barryli_bucket_region" {
+  description = "Barryli site bucket region."
+  value       = module.barryli_site.bucket_region
+}
