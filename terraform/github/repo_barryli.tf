@@ -36,7 +36,7 @@ resource "github_branch_protection" "barryli" {
   required_status_checks {
     strict = false
     contexts = [
-      "build (13.x)",
+      "build (16.x)",
     ]
   }
 }
