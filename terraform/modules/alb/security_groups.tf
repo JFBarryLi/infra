@@ -1,6 +1,7 @@
 resource "aws_security_group" "alb" {
-  name   = "prod-alb-sg"
-  vpc_id = var.vpc_id
+  name        = "prod-alb-sg"
+  description = "Inbound and outbound security group for prod alb."
+  vpc_id      = var.vpc_id
 }
 
 resource "aws_security_group_rule" "alb_allow_http" {

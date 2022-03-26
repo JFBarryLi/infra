@@ -1,6 +1,7 @@
 resource "aws_security_group" "ecs" {
-  name   = "${var.environment}-${var.ecs_cluster_name}-ecs-sg"
-  vpc_id = var.vpc_id
+  name        = "${var.environment}-${var.ecs_cluster_name}-ecs-sg"
+  description = "${var.environment}-${var.ecs_cluster_name}-ecs-sg inbound and outbound."
+  vpc_id      = var.vpc_id
 }
 
 resource "aws_security_group_rule" "ecs_allow_https_from_alb" {
