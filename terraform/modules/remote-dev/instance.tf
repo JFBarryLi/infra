@@ -30,6 +30,8 @@ data "template_file" "mount_efs" {
 resource "aws_instance" "this" {
   count = var.ec2_on
 
+  associate_public_ip_address = "true"
+
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = var.instance_type
   key_name               = var.key_name

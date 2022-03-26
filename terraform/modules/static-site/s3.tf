@@ -7,6 +7,10 @@ resource "aws_s3_bucket" "site" {
     enabled = true
   }
 
+  logging {
+    target_bucket = var.log_bucket_name
+  }
+
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
@@ -107,4 +111,11 @@ data "aws_iam_policy_document" "site_bucket" {
     actions   = ["s3:GetObject"]
     resources = ["${aws_s3_bucket.site.arn}/*"]
   }
+}
+
+resource "aws_s3_bucket_public_access_block" "site" {
+  bucket = aws_s3_bucket.site.id
+
+  block_public_acls   = false
+  block_public_policy = false
 }

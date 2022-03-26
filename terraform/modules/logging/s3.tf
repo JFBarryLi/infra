@@ -16,6 +16,10 @@ resource "aws_s3_bucket" "log" {
     enabled = true
   }
 
+  logging {
+    target_bucket = var.log_bucket_name
+  }
+
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
