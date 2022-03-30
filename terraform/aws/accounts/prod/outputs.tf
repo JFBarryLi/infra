@@ -118,3 +118,9 @@ output "site_barryli_bucket_region" {
   description = "Barryli site bucket region."
   value       = module.barryli_site.bucket_region
 }
+
+output "s3_proxy_api_key" {
+  description = "API key to access s3 proxy."
+  value       = module.notes_pipeline.s3_proxy_api_key
+  sensitive   = true
+}

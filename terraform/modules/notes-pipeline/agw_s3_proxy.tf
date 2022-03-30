@@ -15,6 +15,8 @@ resource "aws_api_gateway_method" "s3_put" {
   resource_id   = aws_api_gateway_resource.item.id
   rest_api_id   = aws_api_gateway_rest_api.s3.id
 
+  api_key_required = true
+
   request_parameters = {
     "method.request.path.item" = true
   }
@@ -135,4 +137,25 @@ resource "aws_api_gateway_stage" "s3" {
     destination_arn = aws_cloudwatch_log_group.s3.arn
     format          = "JSON"
   }
+}
+
+resource "aws_api_gateway_usage_plan" "s3" {
+  name         = "${var.environment}-agw-s3-proxy-usage-plan"
+  description  = "API usage plan for agw s3 proxy."
+
+  api_stages {
+    api_id = aws_api_gateway_rest_api.s3.id
+    stage  = aws_api_gateway_stage.s3.stage_name
+  }
+}
+
+resource "aws_api_gateway_api_key" "s3" {
+  name        = "${var.environment}-s3-proxy-key"
+  description = "API key for using the agw s3 proxy."
+}
+
+resource "aws_api_gateway_usage_plan_key" "s3" {
+  key_id        = aws_api_gateway_api_key.s3.id
+  key_type      = "API_KEY"
+  usage_plan_id = aws_api_gateway_usage_plan.s3.id
 }
