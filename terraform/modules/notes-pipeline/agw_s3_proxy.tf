@@ -4,7 +4,7 @@ resource "aws_api_gateway_rest_api" "s3" {
 }
 
 resource "aws_api_gateway_resource" "item" {
-  parent_id   = aws_api_gateway_rest_api.s3.root_resource.id
+  parent_id   = aws_api_gateway_rest_api.s3.root_resource_id
   path_part   = "{item}"
   rest_api_id = aws_api_gateway_rest_api.s3.id
 }
@@ -37,8 +37,8 @@ resource "aws_api_gateway_integration" "s3" {
 }
 
 resource "aws_api_gateway_method_response" "s3_200" {
-  rest_api_id = aws_api_gateway_rest_api.s3_.id
-  resource_id = aws_api_gateway_rest_api.s3_.root_resource_id
+  rest_api_id = aws_api_gateway_rest_api.s3.id
+  resource_id = aws_api_gateway_rest_api.s3.root_resource_id
   http_method = aws_api_gateway_method.s3_put.http_method
   status_code = "200"
 
@@ -54,7 +54,7 @@ resource "aws_api_gateway_method_response" "s3_200" {
 }
 
 resource "aws_api_gateway_method_response" "s3_400" {
-  depends_on = ["aws_api_gateway_integration.s3"]
+  depends_on = [aws_api_gateway_integration.s3]
 
   rest_api_id = aws_api_gateway_rest_api.s3.id
   resource_id = aws_api_gateway_rest_api.s3.root_resource_id
@@ -63,7 +63,7 @@ resource "aws_api_gateway_method_response" "s3_400" {
 }
 
 resource "aws_api_gateway_method_response" "s3_500" {
-  depends_on = ["aws_api_gateway_integration.s3"]
+  depends_on = [aws_api_gateway_integration.s3]
 
   rest_api_id = aws_api_gateway_rest_api.s3.id
   resource_id = aws_api_gateway_rest_api.s3.root_resource_id
@@ -72,7 +72,7 @@ resource "aws_api_gateway_method_response" "s3_500" {
 }
 
 resource "aws_api_gateway_integration_response" "s3_200" {
-  depends_on = ["aws_api_gateway_integration.s3"]
+  depends_on = [aws_api_gateway_integration.s3]
 
   rest_api_id = aws_api_gateway_rest_api.s3.id
   resource_id = aws_api_gateway_rest_api.s3.root_resource_id
@@ -87,7 +87,7 @@ resource "aws_api_gateway_integration_response" "s3_200" {
 }
 
 resource "aws_api_gateway_integration_response" "s3_400" {
-  depends_on = ["aws_api_gateway_integration.s3"]
+  depends_on = [aws_api_gateway_integration.s3]
 
   rest_api_id = aws_api_gateway_rest_api.s3.id
   resource_id = aws_api_gateway_rest_api.s3.root_resource_id
@@ -98,7 +98,7 @@ resource "aws_api_gateway_integration_response" "s3_400" {
 }
 
 resource "aws_api_gateway_integration_response" "s3_500" {
-  depends_on = ["aws_api_gateway_integration.s3"]
+  depends_on = [aws_api_gateway_integration.s3]
 
   rest_api_id = aws_api_gateway_rest_api.s3.id
   resource_id = aws_api_gateway_rest_api.s3.root_resource_id
@@ -113,7 +113,7 @@ resource "aws_api_gateway_deployment" "s3" {
 
   triggers = {
     redeployment = sha1(jsonencode([
-      aws_api_gateway_resource.s3.id,
+      aws_api_gateway_resource.item.id,
       aws_api_gateway_method.s3_put.id,
       aws_api_gateway_integration.s3.id,
     ]))

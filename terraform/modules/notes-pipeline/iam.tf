@@ -45,12 +45,16 @@ data "aws_iam_policy_document" "agw_log" {
   }
 }
 
+resource "aws_iam_policy" "agw_log" {
+  policy = data.aws_iam_policy_document.agw_log.json
+}
+
 resource "aws_iam_policy" "s3_role" {
   policy = data.aws_iam_policy_document.s3_role.json
 }
 
 resource "aws_iam_role" "s3_role" {
-  name               = "${var.pipeline_name}-s3_role"
+  name               = "${var.pipeline_bucket_name}-s3_role"
   assume_role_policy = data.aws_iam_policy_document.assume_s3_role.json
 }
 
@@ -61,5 +65,5 @@ resource "aws_iam_role_policy_attachment" "s3_role" {
 
 resource "aws_iam_role_policy_attachment" "agw_log" {
   role       = aws_iam_role.s3_role.name
-  policy_arn = aws_iam_policy.apw_log.arn
+  policy_arn = aws_iam_policy.agw_log.arn
 }
