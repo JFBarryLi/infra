@@ -13,3 +13,8 @@ output "s3_proxy_api_key" {
   value       = aws_api_gateway_api_key.s3.value
   sensitive   = true
 }
+
+output "pipeline_bucket_name" {
+  description = "Pipeline bucket name."
+  value       = aws_s3_bucket.pipeline.id
+}

@@ -8,7 +8,7 @@ resource "aws_s3_bucket_public_access_block" "pipeline" {
 }
 
 resource "aws_s3_bucket" "pipeline" {
-  bucket        = var.pipeline_bucket_name
+  bucket_prefix = var.pipeline_bucket_name
   acl           = "private"
   force_destroy = false
 

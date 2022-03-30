@@ -18,7 +18,8 @@ resource "aws_api_gateway_method" "s3_put" {
   api_key_required = true
 
   request_parameters = {
-    "method.request.path.item" = true
+    "method.request.path.item" = true,
+    "method.request.header.x-amz-server-side-encryption" = true
   }
 }
 
@@ -35,12 +36,13 @@ resource "aws_api_gateway_integration" "s3" {
 
   request_parameters = {
     "integration.request.path.key" = "method.request.path.item",
+    "integration.request.header.x-amz-server-side-encryption" = "method.request.header.x-amz-server-side-encryption"
   }
 }
 
 resource "aws_api_gateway_method_response" "s3_200" {
   rest_api_id = aws_api_gateway_rest_api.s3.id
-  resource_id = aws_api_gateway_rest_api.s3.root_resource_id
+  resource_id = aws_api_gateway_resource.item.id
   http_method = aws_api_gateway_method.s3_put.http_method
   status_code = "200"
 
@@ -59,7 +61,7 @@ resource "aws_api_gateway_method_response" "s3_400" {
   depends_on = [aws_api_gateway_integration.s3]
 
   rest_api_id = aws_api_gateway_rest_api.s3.id
-  resource_id = aws_api_gateway_rest_api.s3.root_resource_id
+  resource_id = aws_api_gateway_resource.item.id
   http_method = aws_api_gateway_method.s3_put.http_method
   status_code = "400"
 }
@@ -68,7 +70,7 @@ resource "aws_api_gateway_method_response" "s3_500" {
   depends_on = [aws_api_gateway_integration.s3]
 
   rest_api_id = aws_api_gateway_rest_api.s3.id
-  resource_id = aws_api_gateway_rest_api.s3.root_resource_id
+  resource_id = aws_api_gateway_resource.item.id
   http_method = aws_api_gateway_method.s3_put.http_method
   status_code = "500"
 }
@@ -77,7 +79,7 @@ resource "aws_api_gateway_integration_response" "s3_200" {
   depends_on = [aws_api_gateway_integration.s3]
 
   rest_api_id = aws_api_gateway_rest_api.s3.id
-  resource_id = aws_api_gateway_rest_api.s3.root_resource_id
+  resource_id = aws_api_gateway_resource.item.id
   http_method = aws_api_gateway_method.s3_put.http_method
   status_code = aws_api_gateway_method_response.s3_200.status_code
 
@@ -92,7 +94,7 @@ resource "aws_api_gateway_integration_response" "s3_400" {
   depends_on = [aws_api_gateway_integration.s3]
 
   rest_api_id = aws_api_gateway_rest_api.s3.id
-  resource_id = aws_api_gateway_rest_api.s3.root_resource_id
+  resource_id = aws_api_gateway_resource.item.id
   http_method = aws_api_gateway_method.s3_put.http_method
   status_code = aws_api_gateway_method_response.s3_400.status_code
 
@@ -103,7 +105,7 @@ resource "aws_api_gateway_integration_response" "s3_500" {
   depends_on = [aws_api_gateway_integration.s3]
 
   rest_api_id = aws_api_gateway_rest_api.s3.id
-  resource_id = aws_api_gateway_rest_api.s3.root_resource_id
+  resource_id = aws_api_gateway_resource.item.id
   http_method = aws_api_gateway_method.s3_put.http_method
   status_code = aws_api_gateway_method_response.s3_500.status_code
 
@@ -132,11 +134,6 @@ resource "aws_api_gateway_stage" "s3" {
   deployment_id = aws_api_gateway_deployment.s3.id
   rest_api_id   = aws_api_gateway_rest_api.s3.id
   stage_name    = var.environment
-
-  access_log_settings {
-    destination_arn = aws_cloudwatch_log_group.s3.arn
-    format          = "JSON"
-  }
 }
 
 resource "aws_api_gateway_usage_plan" "s3" {
