@@ -43,7 +43,7 @@ resource "aws_api_gateway_integration" "s3" {
 resource "aws_api_gateway_method_response" "s3_200" {
   rest_api_id = aws_api_gateway_rest_api.s3.id
   resource_id = aws_api_gateway_resource.item.id
-  http_method = aws_api_gateway_method.s3_put.http_method
+  http_method = "GET"
   status_code = "200"
 
   response_parameters = {
@@ -62,7 +62,7 @@ resource "aws_api_gateway_method_response" "s3_400" {
 
   rest_api_id = aws_api_gateway_rest_api.s3.id
   resource_id = aws_api_gateway_resource.item.id
-  http_method = aws_api_gateway_method.s3_put.http_method
+  http_method = "GET"
   status_code = "400"
 }
 
@@ -71,7 +71,7 @@ resource "aws_api_gateway_method_response" "s3_500" {
 
   rest_api_id = aws_api_gateway_rest_api.s3.id
   resource_id = aws_api_gateway_resource.item.id
-  http_method = aws_api_gateway_method.s3_put.http_method
+  http_method = "GET"
   status_code = "500"
 }
 
