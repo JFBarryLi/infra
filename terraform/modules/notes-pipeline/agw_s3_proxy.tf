@@ -10,7 +10,7 @@ resource "aws_api_gateway_resource" "item" {
 }
 
 resource "aws_api_gateway_method" "s3_put" {
-  authorization = "AWS_IAM"
+  authorization = "NONE"
   http_method   = "PUT"
   resource_id   = aws_api_gateway_resource.item.id
   rest_api_id   = aws_api_gateway_rest_api.s3.id
@@ -31,7 +31,7 @@ resource "aws_api_gateway_integration" "s3" {
 
   integration_http_method = aws_api_gateway_method.s3_put.http_method
 
-  uri         = "arn:aws:apigateway:${data.aws_region.current.name}:s3:action/PutObject?Bucket=${var.pipeline_bucket_name}&Key={key}"
+  uri         = "arn:aws:apigateway:${data.aws_region.current.name}:s3:action/PutObject?Bucket=${aws_s3_bucket.pipeline.id}&Key={key}"
   credentials = aws_iam_role.s3_role.arn
 
   request_parameters = {
