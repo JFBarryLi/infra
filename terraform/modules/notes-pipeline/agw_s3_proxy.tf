@@ -136,6 +136,17 @@ resource "aws_api_gateway_stage" "s3" {
   stage_name    = var.environment
 }
 
+resource "aws_api_gateway_method_settings" "all" {
+  rest_api_id = aws_api_gateway_rest_api.s3.id
+  stage_name  = aws_api_gateway_stage.s3.stage_name
+  method_path = "*/*"
+
+  settings {
+    metrics_enabled = true
+    logging_level   = "INFO"
+  }
+}
+
 resource "aws_api_gateway_usage_plan" "s3" {
   name         = "${var.environment}-agw-s3-proxy-usage-plan"
   description  = "API usage plan for agw s3 proxy."
