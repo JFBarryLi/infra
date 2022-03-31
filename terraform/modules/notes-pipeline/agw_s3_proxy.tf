@@ -18,8 +18,7 @@ resource "aws_api_gateway_method" "s3_put" {
   api_key_required = true
 
   request_parameters = {
-    "method.request.path.item" = true,
-    "method.request.header.x-amz-server-side-encryption" = true
+    "method.request.path.item" = true
   }
 }
 
@@ -31,12 +30,13 @@ resource "aws_api_gateway_integration" "s3" {
 
   integration_http_method = aws_api_gateway_method.s3_put.http_method
 
-  uri         = "arn:aws:apigateway:${data.aws_region.current.name}:s3:action/PutObject?Bucket=${aws_s3_bucket.pipeline.id}&Key={key}"
+  uri         = "arn:aws:apigateway:${data.aws_region.current.name}:s3:path/${aws_s3_bucket.pipeline.id}/notes/{key}"
   credentials = aws_iam_role.s3_role.arn
 
   request_parameters = {
     "integration.request.path.key" = "method.request.path.item",
-    "integration.request.header.x-amz-server-side-encryption" = "method.request.header.x-amz-server-side-encryption"
+    "integration.request.header.x-amz-server-side-encryption" = "'AES256'",
+    "integration.request.header.x-amz-acl" = "'bucket-owner-full-control'"
   }
 }
 
