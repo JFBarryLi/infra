@@ -103,3 +103,9 @@ output "s3_proxy_api_key" {
   value       = module.notes_pipeline.s3_proxy_api_key
   sensitive   = true
 }
+
+output "dynamo_proxy_api_key" {
+  description = "API key to access dynamo proxy."
+  value       = module.notes_pipeline.dynamo_proxy_api_key
+  sensitive   = true
+}

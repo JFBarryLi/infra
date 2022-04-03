@@ -1,5 +1,5 @@
 resource "aws_api_gateway_rest_api" "s3" {
-  name        = "notes-pipeline"
+  name        = "notes-pipeline-s3-proxy"
   description = "Api gateway proxy for storing notes on s3."
 }
 

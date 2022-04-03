@@ -14,6 +14,12 @@ output "s3_proxy_api_key" {
   sensitive   = true
 }
 
+output "dynamo_proxy_api_key" {
+  description = "API key to access dynamo proxy."
+  value       = aws_api_gateway_api_key.dynamo.value
+  sensitive   = true
+}
+
 output "pipeline_bucket_name" {
   description = "Pipeline bucket name."
   value       = aws_s3_bucket.pipeline.id
