@@ -1,4 +1,4 @@
-data "aws_iam_policy_document" "assume_s3_role" {
+data "aws_iam_policy_document" "assume_role" {
   statement {
     actions = ["sts:AssumeRole"]
 
@@ -20,6 +20,21 @@ data "aws_iam_policy_document" "s3_role" {
 
     resources = [
       "${aws_s3_bucket.pipeline.arn}/*"
+    ]
+  }
+}
+
+data "aws_iam_policy_document" "dynamodb_role" {
+  statement {
+    sid    = "AllowQuery"
+    effect = "Allow"
+
+    actions = [
+      "dynamodb:Query"
+    ]
+
+    resources = [
+      aws_dynamodb_table.travel_log.arn
     ]
   }
 }
@@ -53,19 +68,33 @@ resource "aws_iam_policy" "s3_role" {
   policy = data.aws_iam_policy_document.s3_role.json
 }
 
+resource "aws_iam_policy" "dynamodb_role" {
+  policy = data.aws_iam_policy_document.dynamodb_role.json
+}
+
 resource "aws_iam_role" "s3_role" {
   name               = "${var.pipeline_bucket_name}-s3_role"
-  assume_role_policy = data.aws_iam_policy_document.assume_s3_role.json
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+}
+
+resource "aws_iam_role" "dynamodb_role" {
+  name               = "travel_log_dynamodb_role"
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
 resource "aws_iam_role" "cloudwatch" {
   name               = "${var.pipeline_bucket_name}-cloudwatch_role"
-  assume_role_policy = data.aws_iam_policy_document.assume_s3_role.json
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
 resource "aws_iam_role_policy_attachment" "s3_role" {
   role       = aws_iam_role.s3_role.name
   policy_arn = aws_iam_policy.s3_role.arn
+}
+
+resource "aws_iam_role_policy_attachment" "dynamodb_role" {
+  role       = aws_iam_role.dynamodb_role.name
+  policy_arn = aws_iam_policy.dynamodb_role.arn
 }
 
 resource "aws_iam_role_policy_attachment" "cloudwatch" {
