@@ -36,7 +36,7 @@ resource "aws_api_gateway_integration" "dynamo" {
 
   integration_http_method = "POST"
   uri                     = "arn:aws:apigateway:${data.aws_region.current.name}:dynamodb:action/Query"
-  credentials             = aws_iam_role.dynamodb.arn
+  credentials             = aws_iam_role.dynamodb_role.arn
   request_templates = {
     "application/json" = <<EOF
       {
@@ -52,7 +52,7 @@ resource "aws_api_gateway_integration" "dynamo" {
   }
 }
 
-resource "aws_api_gateway_method_response" "dynamo__200" {
+resource "aws_api_gateway_method_response" "dynamo_200" {
   rest_api_id = aws_api_gateway_rest_api.dynamo.id
   resource_id = aws_api_gateway_resource.trip.id
   http_method = aws_api_gateway_method.dynamo_get.http_method
@@ -144,7 +144,7 @@ resource "aws_api_gateway_stage" "dynamo" {
   stage_name    = var.environment
 }
 
-resource "aws_api_gateway_method_settings" "all" {
+resource "aws_api_gateway_method_settings" "dynamo" {
   rest_api_id = aws_api_gateway_rest_api.dynamo.id
   stage_name  = aws_api_gateway_stage.dynamo.stage_name
   method_path = "*/*"

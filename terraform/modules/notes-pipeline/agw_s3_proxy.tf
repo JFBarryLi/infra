@@ -136,7 +136,7 @@ resource "aws_api_gateway_stage" "s3" {
   stage_name    = var.environment
 }
 
-resource "aws_api_gateway_method_settings" "all" {
+resource "aws_api_gateway_method_settings" "s3" {
   rest_api_id = aws_api_gateway_rest_api.s3.id
   stage_name  = aws_api_gateway_stage.s3.stage_name
   method_path = "*/*"
