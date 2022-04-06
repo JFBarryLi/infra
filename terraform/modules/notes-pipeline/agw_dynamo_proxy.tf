@@ -44,7 +44,7 @@ resource "aws_api_gateway_integration" "dynamo" {
         "KeyConditionExpression": "TripName = :trip",
         "ExpressionAttributeValues": {
           ":trip": {
-              "S": "$input.params('trip')"
+              "S": "$util.escapeJavaScript($util.urlDecode($input.params('trip')))"
           }
         }
       }
@@ -127,7 +127,7 @@ resource "aws_api_gateway_deployment" "dynamo" {
     redeployment = sha1(jsonencode([
       aws_api_gateway_resource.trip.id,
       aws_api_gateway_method.dynamo_get.id,
-      aws_api_gateway_integration.dynamo.id,
+      aws_api_gateway_integration.dynamo,
     ]))
   }
 
