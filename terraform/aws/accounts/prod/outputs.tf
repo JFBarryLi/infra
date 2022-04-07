@@ -109,3 +109,8 @@ output "dynamo_proxy_api_key" {
   value       = module.notes_pipeline.dynamo_proxy_api_key
   sensitive   = true
 }
+
+output "barryli_api_domain" {
+  description = "API domain for barryli.ca"
+  value       = aws_api_gateway_domain_name.barryli_api.domain_name
+}
