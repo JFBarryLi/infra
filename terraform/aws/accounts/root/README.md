@@ -13,8 +13,8 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_logging"></a> [logging](#module\_logging) | ../../../modules/logging// |  |
-| <a name="module_remote-state"></a> [remote-state](#module\_remote-state) | ../../../modules/remote-state// |  |
+| <a name="module_logging"></a> [logging](#module\_logging) | ../../../modules/logging// | n/a |
+| <a name="module_remote-state"></a> [remote-state](#module\_remote-state) | ../../../modules/remote-state// | n/a |
 
 ## Resources
 

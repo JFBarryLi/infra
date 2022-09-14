@@ -15,7 +15,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_cert"></a> [cert](#module\_cert) | ../acm-certificate |  |
+| <a name="module_cert"></a> [cert](#module\_cert) | ../acm-certificate | n/a |
 
 ## Resources
 
@@ -29,6 +29,7 @@ No requirements.
 | [aws_route53_record.alias](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 | [aws_s3_bucket.site](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket_policy.site](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
+| [aws_s3_bucket_public_access_block.site](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.deployer](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.site_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
@@ -38,7 +39,8 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | The primary domain name for the distribution. | `string` | n/a | yes |
-| <a name="input_log_bucket_domain"></a> [log\_bucket\_domain](#input\_log\_bucket\_domain) | The name of the S3 bucket to write logs to. | `string` | n/a | yes |
+| <a name="input_log_bucket_domain"></a> [log\_bucket\_domain](#input\_log\_bucket\_domain) | The domain of the S3 bucket to write logs to. | `string` | n/a | yes |
+| <a name="input_log_bucket_name"></a> [log\_bucket\_name](#input\_log\_bucket\_name) | The name of the S3 bucket to write logs to. | `string` | n/a | yes |
 | <a name="input_zone_id"></a> [zone\_id](#input\_zone\_id) | Zone id of the created zone for the domain. | `string` | n/a | yes |
 
 ## Outputs

@@ -15,7 +15,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_cert"></a> [cert](#module\_cert) | ../acm-certificate |  |
+| <a name="module_cert"></a> [cert](#module\_cert) | ../acm-certificate | n/a |
 
 ## Resources
 
@@ -38,6 +38,8 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name. | `string` | n/a | yes |
+| <a name="input_lb_enabled"></a> [lb\_enabled](#input\_lb\_enabled) | Flag to enable/disable the lb | `bool` | n/a | yes |
+| <a name="input_log_bucket_name"></a> [log\_bucket\_name](#input\_log\_bucket\_name) | The name of the S3 bucket to write logs to. | `string` | n/a | yes |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | List of subnet ids. | `list(string)` | n/a | yes |
 | <a name="input_targets"></a> [targets](#input\_targets) | Targets for the alb. | <pre>map(object({<br>    domain = string<br>    port   = number<br>  }))</pre> | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | vpc\_id. | `string` | n/a | yes |
