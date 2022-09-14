@@ -1,3 +1,8 @@
+variable "lb_enabled" {
+  type        = bool
+  description = "Flag to enable/disable the lb"
+}
+
 variable "environment" {
   type        = string
   description = "Environment name."

@@ -1,4 +1,6 @@
 resource "aws_lb" "this" {
+  count = var.lb_enabled == true ? 1 : 0
+
   name = "${var.environment}-alb"
 
   load_balancer_type = "application"
@@ -17,7 +19,9 @@ resource "aws_lb" "this" {
 }
 
 resource "aws_lb_listener" "this" {
-  load_balancer_arn = aws_lb.this.arn
+  count = var.lb_enabled == true ? 1 : 0
+
+  load_balancer_arn = aws_lb.this[0].arn
   port              = 443
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-TLS-1-2-2017-01"
@@ -30,14 +34,16 @@ resource "aws_lb_listener" "this" {
 }
 
 resource "aws_lb_listener_certificate" "this" {
-  for_each = module.cert
+  for_each = var.lb_enabled == true ? module.cert : {}
 
-  listener_arn    = aws_lb_listener.this.arn
+  listener_arn    = aws_lb_listener.this[0].arn
   certificate_arn = each.value.certificate_arn
 }
 
 resource "aws_lb_listener" "redirect" {
-  load_balancer_arn = aws_lb.this.arn
+  count = var.lb_enabled == true ? 1 : 0
+
+  load_balancer_arn = aws_lb.this[0].arn
   port              = "80"
   protocol          = "HTTP"
 
@@ -53,7 +59,7 @@ resource "aws_lb_listener" "redirect" {
 }
 
 resource "aws_lb_target_group" "this" {
-  for_each = var.targets
+  for_each = var.lb_enabled == true ? var.targets : {}
 
   port        = each.value.port
   protocol    = "HTTP"
@@ -67,19 +73,15 @@ resource "aws_lb_target_group" "this" {
     type    = "lb_cookie"
   }
 
-  depends_on = [
-    aws_lb.this
-  ]
-
   lifecycle {
     create_before_destroy = true
   }
 }
 
 resource "aws_alb_listener_rule" "this" {
-  for_each = var.targets
+  for_each = var.lb_enabled == true ? var.targets : {}
 
-  listener_arn = aws_lb_listener.this.arn
+  listener_arn = aws_lb_listener.this[0].arn
   priority     = 1
 
   action {

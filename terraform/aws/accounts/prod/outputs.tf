@@ -47,7 +47,7 @@ output "repository_urls" {
 
 output "api_fea_service_endpoint" {
   description = "Fea api service domain name."
-  value       = module.alb.endpoints["api_fea"]
+  value       = local.lb_enabled == true ? module.alb.endpoints["api_fea"] : null
 }
 
 output "fea_service_deployer_access_key_id" {

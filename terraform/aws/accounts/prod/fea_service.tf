@@ -6,12 +6,12 @@ module "fea_service" {
 
   ecs_cluster_arn = module.ecs.ecs_cluster_arn
 
-  lb_enabled = true
+  lb_enabled = local.lb_enabled
 
   target_groups = [{
     container_name   = "fea-app"
     container_port   = 80
-    target_group_arn = module.alb.target_groups["api_fea"]
+    target_group_arn = local.lb_enabled == true ? module.alb.target_groups["api_fea"] : null
   }]
 
   repo_names = {
