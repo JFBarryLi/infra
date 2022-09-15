@@ -17,3 +17,13 @@ variable "domain_name" {
   type        = string
   description = "API domain name."
 }
+
+variable "service_name" {
+  type        = string
+  description = "Name of the service."
+}
+
+variable "ecs_cluster_arn" {
+  type        = string
+  description = "Ecs cluster arn."
+}

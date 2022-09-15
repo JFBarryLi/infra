@@ -114,3 +114,14 @@ output "barryli_api_domain" {
   description = "API domain for barryli.ca"
   value       = aws_api_gateway_domain_name.barryli_api.domain_name
 }
+
+output "notes_pipeline_service_deployer_access_key_id" {
+  description = "The AWS access key id that can deploy the notes pipeline."
+  value       = module.notes_pipeline.service_deployer_access_key_id
+}
+
+output "notes_pipeline_service_deployer_secret_access_key" {
+  description = "The Aws secret access key that can deploy the notes pipeline."
+  value       = module.notes_pipeline.service_deployer_secret_access_key
+  sensitive   = true
+}

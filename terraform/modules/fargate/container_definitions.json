@@ -1,0 +1,16 @@
+[
+  {
+    "entryPoint": [
+      "sh",
+      "-c"
+    ],
+    "command": [
+      "/bin/sh"
+    ],
+    "cpu": 1024,
+    "memory": 2048,
+    "image": "httpd:2.4",
+    "name": "placeholder",
+    "essential": true
+  }
+]

@@ -24,3 +24,19 @@ output "pipeline_bucket_name" {
   description = "Pipeline bucket name."
   value       = aws_s3_bucket.pipeline.id
 }
+
+output "service_deployer_access_key_id" {
+  description = "The AWS access key id for the service deployer."
+  value       = module.travel.service_deployer_access_key_id
+}
+
+output "service_deployer_secret_access_key" {
+  description = "The AWS secret access key for managing the service deployer."
+  value       = module.travel.service_deployer_secret_access_key
+  sensitive   = true
+}
+
+output "task_role_arn" {
+  description = "Default task IAM role arn."
+  value       = aws_iam_role.task_role.arn
+}
