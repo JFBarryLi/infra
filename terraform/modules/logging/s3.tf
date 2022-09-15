@@ -51,7 +51,7 @@ resource "aws_s3_bucket" "log" {
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "log" {
-  bucket = aws_s3_bucket.log
+  bucket = aws_s3_bucket.log.bucket
 
   rule {
     apply_server_side_encryption_by_default {

@@ -38,7 +38,7 @@ resource "aws_s3_bucket" "pipeline" {
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "pipeline" {
-  bucket = aws_s3_bucket.pipeline
+  bucket = aws_s3_bucket.pipeline.bucket
 
   rule {
     apply_server_side_encryption_by_default {
