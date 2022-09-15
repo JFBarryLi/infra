@@ -20,14 +20,6 @@ resource "aws_s3_bucket" "log" {
     target_bucket = var.log_bucket_name
   }
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
-    }
-  }
-
   tags = {
     Name      = var.log_bucket_name
     ManagedBy = "terraform"
@@ -54,6 +46,16 @@ resource "aws_s3_bucket" "log" {
 
     noncurrent_version_expiration {
       days = "365"
+    }
+  }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "log" {
+  bucket = aws_s3_bucket.log
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
     }
   }
 }

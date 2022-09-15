@@ -11,14 +11,6 @@ resource "aws_s3_bucket" "site" {
     target_bucket = var.log_bucket_name
   }
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
-    }
-  }
-
   lifecycle_rule {
     id                                     = "${var.domain_name}-lifecycle"
     enabled                                = true
@@ -33,6 +25,16 @@ resource "aws_s3_bucket" "site" {
   tags = {
     Name      = var.domain_name
     ManagedBy = "terraform"
+  }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "site" {
+  bucket = aws_s3_bucket.site
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
   }
 }
 
