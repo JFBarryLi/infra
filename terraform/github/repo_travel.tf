@@ -78,3 +78,24 @@ resource "github_actions_secret" "notes_pipeline_aws_account_id" {
   secret_name     = "AWS_ACCOUNT_ID"
   plaintext_value = data.terraform_remote_state.prod.outputs.aws_account_id
 }
+
+# TF_VAR_alert_webhook environment variable is used here.
+variable "alert_webhook" {}
+
+resource "github_actions_secret" "notes_pipeline_alert_webhook" {
+  repository      = github_repository.travel.name
+  secret_name     = "ALERT_WEBHOOK"
+  plaintext_value = var.alert_webhook
+}
+
+resource "github_actions_secret" "notes_pipeline_travel_table" {
+  repository      = github_repository.travel.name
+  secret_name     = "TRAVEL_TABLE"
+  plaintext_value = data.terraform_remote_state.prod.outputs.notes_pipeline_travel_table
+}
+
+resource "github_actions_secret" "notes_pipeline_notes_bucket_name" {
+  repository      = github_repository.travel.name
+  secret_name     = "NOTES_BUCKET_NAME"
+  plaintext_value = data.terraform_remote_state.prod.outputs.notes_pipeline_notes_bucket_name
+}

@@ -132,11 +132,21 @@ output "notes_pipeline_repository_urls" {
 }
 
 output "notes_pipeline_awslogs_group_name" {
-  description = "Cloudwatch log group arn."
-  value       = module.notes_pipeline.cloudwatch_log_group_arn
+  description = "Notes pipeline awslogs group name."
+  value       = module.notes_pipeline.awslogs_group_name
 }
 
 output "notes_pipeline_task_role_arn" {
   description = "Default task IAM role arn for notes_pipeline."
   value       = module.notes_pipeline.task_role_arn
+}
+
+output "notes_pipeline_notes_bucket_name" {
+  description = "S3 bucket containg the uploaded notes."
+  value       = module.notes_pipeline.pipeline_bucket_name
+}
+
+output "notes_pipeline_travel_table" {
+  description = "Dyamodb table containg the processed travel data."
+  value       = module.notes_pipeline.travel_table
 }

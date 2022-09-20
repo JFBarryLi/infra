@@ -46,7 +46,12 @@ output "repository_urls" {
   value       = module.travel.repository_urls
 }
 
-output "cloudwatch_log_group_arn" {
-  description = "Cloudwatch log group arn."
-  value       = module.travel.cloudwatch_log_group_arn
+output "awslogs_group_name" {
+  description = "Awslogs group name."
+  value       = module.travel.awslogs_group_name
+}
+
+output "travel_table" {
+  description = "Dynamodb table storing the processed travel data."
+  value       = aws_dynamodb_table.travel_log.name
 }
