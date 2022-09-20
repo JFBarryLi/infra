@@ -8,14 +8,14 @@ output "awslogs_group_name" {
   value       = aws_cloudwatch_log_group.this.name
 }
 
-output "service_deployer_access_key_id" {
-  description = "The AWS access key id for the service deployer."
-  value       = aws_iam_access_key.service_deployer.id
+output "task_deployer_access_key_id" {
+  description = "The AWS access key id for the task deployer."
+  value       = aws_iam_access_key.task_deployer.id
 }
 
-output "service_deployer_secret_access_key" {
-  description = "The AWS secret access key for managing the service deployer."
-  value       = aws_iam_access_key.service_deployer.secret
+output "task_deployer_secret_access_key" {
+  description = "The AWS secret access key for managing the task deployer."
+  value       = aws_iam_access_key.task_deployer.secret
   sensitive   = true
 }
 

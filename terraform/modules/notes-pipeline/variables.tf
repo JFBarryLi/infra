@@ -18,9 +18,9 @@ variable "domain_name" {
   description = "API domain name."
 }
 
-variable "service_name" {
+variable "task_name" {
   type        = string
-  description = "Name of the service."
+  description = "Name of the task."
 }
 
 variable "ecs_cluster_arn" {

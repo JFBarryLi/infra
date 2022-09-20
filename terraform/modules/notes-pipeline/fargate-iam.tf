@@ -68,7 +68,7 @@ resource "aws_iam_policy" "task_role" {
 }
 
 resource "aws_iam_role" "task_role" {
-  name               = "${var.service_name}-task_role"
+  name               = "${var.task_name}-task_role"
   assume_role_policy = data.aws_iam_policy_document.assume_task_role.json
 }
 

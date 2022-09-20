@@ -1,6 +1,6 @@
 resource "aws_security_group" "fargate" {
-  name        = "${var.environment}-${var.service_name}-fargate-sg"
-  description = "${var.environment}-${var.service_name}-fargate-sg outbound only."
+  name        = "${var.environment}-${var.task_name}-fargate-sg"
+  description = "${var.environment}-${var.task_name}-fargate-sg outbound only."
   vpc_id      = var.vpc_id
 }
 

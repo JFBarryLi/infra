@@ -25,14 +25,14 @@ output "pipeline_bucket_name" {
   value       = aws_s3_bucket.pipeline.id
 }
 
-output "service_deployer_access_key_id" {
-  description = "The AWS access key id for the service deployer."
-  value       = module.travel.service_deployer_access_key_id
+output "task_deployer_access_key_id" {
+  description = "The AWS access key id for the task deployer."
+  value       = module.travel.task_deployer_access_key_id
 }
 
-output "service_deployer_secret_access_key" {
-  description = "The AWS secret access key for managing the service deployer."
-  value       = module.travel.service_deployer_secret_access_key
+output "task_deployer_secret_access_key" {
+  description = "The AWS secret access key for managing the task deployer."
+  value       = module.travel.task_deployer_secret_access_key
   sensitive   = true
 }
 

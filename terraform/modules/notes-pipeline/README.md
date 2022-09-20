@@ -13,7 +13,9 @@ No requirements.
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_travel"></a> [travel](#module\_travel) | ../fargate | n/a |
 
 ## Resources
 
@@ -61,20 +63,26 @@ No modules.
 | [aws_iam_policy.cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.dynamodb_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.s3_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_policy.task_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role.cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role.dynamodb_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role.s3_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role.task_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.dynamodb_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.s3_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.task_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_s3_bucket.pipeline](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket_policy.pipeline](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
 | [aws_s3_bucket_public_access_block.pipeline](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
+| [aws_s3_bucket_server_side_encryption_configuration.pipeline](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
 | [aws_iam_policy_document.assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.assume_task_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.dynamodb_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.pipeline](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.s3_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.task_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
 ## Inputs
@@ -82,9 +90,13 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | API domain name. | `string` | n/a | yes |
+| <a name="input_ecs_cluster_arn"></a> [ecs\_cluster\_arn](#input\_ecs\_cluster\_arn) | Ecs cluster arn. | `string` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment name. | `string` | n/a | yes |
 | <a name="input_log_bucket_name"></a> [log\_bucket\_name](#input\_log\_bucket\_name) | The name of the S3 bucket to write logs to. | `string` | n/a | yes |
 | <a name="input_pipeline_bucket_name"></a> [pipeline\_bucket\_name](#input\_pipeline\_bucket\_name) | The name of the S3 bucket to store pipeline objects. | `string` | n/a | yes |
+| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | A list of subnet ids to launch resources in. | `list(string)` | n/a | yes |
+| <a name="input_task_name"></a> [task\_name](#input\_task\_name) | Name of the task. | `string` | n/a | yes |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | Vpc id. | `string` | n/a | yes |
 
 ## Outputs
 
@@ -95,4 +107,7 @@ No modules.
 | <a name="output_dynamo_proxy_api_key"></a> [dynamo\_proxy\_api\_key](#output\_dynamo\_proxy\_api\_key) | API key to access dynamo proxy. |
 | <a name="output_pipeline_bucket_name"></a> [pipeline\_bucket\_name](#output\_pipeline\_bucket\_name) | Pipeline bucket name. |
 | <a name="output_s3_proxy_api_key"></a> [s3\_proxy\_api\_key](#output\_s3\_proxy\_api\_key) | API key to access s3 proxy. |
+| <a name="output_task_deployer_access_key_id"></a> [task\_deployer\_access\_key\_id](#output\_task\_deployer\_access\_key\_id) | The AWS access key id for the task deployer. |
+| <a name="output_task_deployer_secret_access_key"></a> [task\_deployer\_secret\_access\_key](#output\_task\_deployer\_secret\_access\_key) | The AWS secret access key for managing the task deployer. |
+| <a name="output_task_role_arn"></a> [task\_role\_arn](#output\_task\_role\_arn) | Default task IAM role arn. |
 <!-- END_TF_DOCS -->

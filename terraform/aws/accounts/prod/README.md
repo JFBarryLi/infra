@@ -9,7 +9,7 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.26.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.30.0 |
 
 ## Modules
 
@@ -53,6 +53,8 @@ No inputs.
 | <a name="output_fea_service_deployer_access_key_id"></a> [fea\_service\_deployer\_access\_key\_id](#output\_fea\_service\_deployer\_access\_key\_id) | The AWS access key id for the fea service deployer. |
 | <a name="output_fea_service_deployer_secret_access_key"></a> [fea\_service\_deployer\_secret\_access\_key](#output\_fea\_service\_deployer\_secret\_access\_key) | The AWS secret access key for the fea service deployer. |
 | <a name="output_fea_service_task_role_arn"></a> [fea\_service\_task\_role\_arn](#output\_fea\_service\_task\_role\_arn) | Fea service default task IAM role arn. |
+| <a name="output_notes_pipeline_service_deployer_access_key_id"></a> [notes\_pipeline\_service\_deployer\_access\_key\_id](#output\_notes\_pipeline\_service\_deployer\_access\_key\_id) | The AWS access key id that can deploy the notes pipeline. |
+| <a name="output_notes_pipeline_task_deployer_secret_access_key"></a> [notes\_pipeline\_task\_deployer\_secret\_access\_key](#output\_notes\_pipeline\_task\_deployer\_secret\_access\_key) | The Aws secret access key that can deploy the notes pipeline. |
 | <a name="output_repository_urls"></a> [repository\_urls](#output\_repository\_urls) | Ecr repo urls. |
 | <a name="output_s3_proxy_api_key"></a> [s3\_proxy\_api\_key](#output\_s3\_proxy\_api\_key) | API key to access s3 proxy. |
 | <a name="output_site_barryli_bucket_name"></a> [site\_barryli\_bucket\_name](#output\_site\_barryli\_bucket\_name) | Barryli site bucket name. |

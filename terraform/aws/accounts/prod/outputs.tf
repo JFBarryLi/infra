@@ -117,11 +117,11 @@ output "barryli_api_domain" {
 
 output "notes_pipeline_service_deployer_access_key_id" {
   description = "The AWS access key id that can deploy the notes pipeline."
-  value       = module.notes_pipeline.service_deployer_access_key_id
+  value       = module.notes_pipeline.task_deployer_access_key_id
 }
 
-output "notes_pipeline_service_deployer_secret_access_key" {
+output "notes_pipeline_task_deployer_secret_access_key" {
   description = "The Aws secret access key that can deploy the notes pipeline."
-  value       = module.notes_pipeline.service_deployer_secret_access_key
+  value       = module.notes_pipeline.task_deployer_secret_access_key
   sensitive   = true
 }

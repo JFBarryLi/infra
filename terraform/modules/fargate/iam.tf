@@ -1,19 +1,19 @@
-resource "aws_iam_user" "service_deployer" {
-  name          = "${var.service_name}-service_deployer"
+resource "aws_iam_user" "task_deployer" {
+  name          = "${var.task_name}-task_deployer"
   force_destroy = true
 }
 
-resource "aws_iam_access_key" "service_deployer" {
-  user = aws_iam_user.service_deployer.name
+resource "aws_iam_access_key" "task_deployer" {
+  user = aws_iam_user.task_deployer.name
 }
 
-resource "aws_iam_user_policy" "service_deployer" {
-  name   = "${var.service_name}-service_deployer"
-  user   = aws_iam_user.service_deployer.name
-  policy = data.aws_iam_policy_document.service_deployer.json
+resource "aws_iam_user_policy" "task_deployer" {
+  name   = "${var.task_name}-task_deployer"
+  user   = aws_iam_user.task_deployer.name
+  policy = data.aws_iam_policy_document.task_deployer.json
 }
 
-data "aws_iam_policy_document" "service_deployer" {
+data "aws_iam_policy_document" "task_deployer" {
   statement {
     sid    = "RegisterTaskDefinition"
     effect = "Allow"
@@ -36,20 +36,6 @@ data "aws_iam_policy_document" "service_deployer" {
     ]
 
     resources = ["*"]
-  }
-
-  statement {
-    sid    = "DeployService"
-    effect = "Allow"
-
-    actions = [
-      "ecs:UpdateService",
-      "ecs:DescribeServices"
-    ]
-
-    resources = [
-      aws_ecs_service.this.id
-    ]
   }
 
   statement {
