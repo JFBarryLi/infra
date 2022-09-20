@@ -24,12 +24,13 @@ resource "aws_ecs_service" "this" {
     data.aws_ecs_task_definition.this.revision,
   )}"
 
+  launch_type                        = "FARGATE"
   desired_count                      = var.task_desired_count
   deployment_maximum_percent         = var.task_max_percent
   deployment_minimum_healthy_percent = var.task_min_percent
 
   network_configuration {
-    security_groups  = tolist([aws_security_group.fargate])
+    security_groups  = tolist([aws_security_group.fargate.id])
     subnets          = var.subnet_ids
     assign_public_ip = false
   }

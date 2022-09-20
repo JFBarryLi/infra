@@ -14,7 +14,7 @@ module "travel" {
     }
   }
 
-  task_desired_count = 1
+  task_desired_count = 0
   task_max_percent   = 100
   task_min_percent   = 0
 }
