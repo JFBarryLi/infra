@@ -14,7 +14,7 @@ data "terraform_remote_state" "prod" {
 
   config = {
     bucket = "barry-li-remote-state"
-    key    = "env:/prod/terraform.tfstate"
+    key    = "terraform.tfstate"
     region = "us-east-1"
   }
 }

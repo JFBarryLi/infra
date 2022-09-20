@@ -40,3 +40,13 @@ output "task_role_arn" {
   description = "Default task IAM role arn."
   value       = aws_iam_role.task_role.arn
 }
+
+output "repository_urls" {
+  description = "Ecr repo urls."
+  value       = module.travel.repository_urls
+}
+
+output "cloudwatch_log_group_arn" {
+  description = "Cloudwatch log group arn."
+  value       = module.travel.cloudwatch_log_group_arn
+}

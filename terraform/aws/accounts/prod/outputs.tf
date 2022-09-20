@@ -125,3 +125,18 @@ output "notes_pipeline_task_deployer_secret_access_key" {
   value       = module.notes_pipeline.task_deployer_secret_access_key
   sensitive   = true
 }
+
+output "notes_pipeline_repository_urls" {
+  description = "Ecr repo urls."
+  value       = module.notes_pipeline.repository_urls
+}
+
+output "notes_pipeline_awslogs_group_name" {
+  description = "Cloudwatch log group arn."
+  value       = module.notes_pipeline.cloudwatch_log_group_arn
+}
+
+output "notes_pipeline_task_role_arn" {
+  description = "Default task IAM role arn for notes_pipeline."
+  value       = module.notes_pipeline.task_role_arn
+}

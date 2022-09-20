@@ -40,25 +40,25 @@ resource "github_branch_protection" "ova" {
 resource "github_actions_secret" "ova_service_deployer_access_key" {
   repository      = github_repository.ova.name
   secret_name     = "AWS_ACCESS_KEY_ID"
-  plaintext_value = data.terraform_remote_state.prod.outputs.ova_service_deployer_access_key_id
+  plaintext_value = ""
 }
 
 resource "github_actions_secret" "ova_service_deployer_secret_key" {
   repository      = github_repository.ova.name
   secret_name     = "AWS_SECRET_ACCESS_KEY"
-  plaintext_value = data.terraform_remote_state.prod.outputs.ova_service_deployer_secret_access_key
+  plaintext_value = ""
 }
 
 resource "github_actions_secret" "ova_service_task_role_arn" {
   repository      = github_repository.ova.name
   secret_name     = "TASK_ROLE_ARN"
-  plaintext_value = data.terraform_remote_state.prod.outputs.ova_service_task_role_arn
+  plaintext_value = ""
 }
 
 resource "github_actions_secret" "ova_service_awslogs_group_name" {
   repository      = github_repository.ova.name
   secret_name     = "AWSLOGS_GROUP_NAME"
-  plaintext_value = data.terraform_remote_state.prod.outputs.ova_service_awslogs_group_name
+  plaintext_value = ""
 }
 
 resource "github_actions_secret" "ova_service_aws_region" {
