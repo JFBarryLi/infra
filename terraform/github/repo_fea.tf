@@ -40,7 +40,7 @@ resource "github_branch_protection" "fea" {
 resource "github_actions_secret" "fea_repository_url" {
   repository      = github_repository.fea.name
   secret_name     = "REPOSITORY_URL"
-  plaintext_value = data.terraform_remote_state.prod.outputs.repository_urls["api_fea"]
+  plaintext_value = data.terraform_remote_state.prod.outputs.fea_service_repository_urls["api_fea"]
 }
 
 resource "github_actions_secret" "fea_service_deployer_access_key" {

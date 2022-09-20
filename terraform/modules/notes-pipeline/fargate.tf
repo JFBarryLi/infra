@@ -9,7 +9,7 @@ module "travel" {
   subnet_ids      = var.subnet_ids
 
   repo_names = {
-    task_repo = {
+    travel_repo = {
       name = var.task_name
     }
   }

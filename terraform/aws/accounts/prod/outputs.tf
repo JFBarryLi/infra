@@ -40,14 +40,14 @@ output "site_fea_bucket_region" {
   value       = module.fea_site.bucket_region
 }
 
-output "repository_urls" {
+output "fea_service_repository_urls" {
   description = "Ecr repo urls."
   value       = module.fea_service.repository_urls
 }
 
 output "api_fea_service_endpoint" {
   description = "Fea api service domain name."
-  value       = local.lb_enabled == true ? module.alb.endpoints["api_fea"] : null
+  value       = local.lb_enabled == true ? module.alb.endpoints["api_fea"] : ""
 }
 
 output "fea_service_deployer_access_key_id" {
@@ -115,7 +115,7 @@ output "barryli_api_domain" {
   value       = aws_api_gateway_domain_name.barryli_api.domain_name
 }
 
-output "notes_pipeline_service_deployer_access_key_id" {
+output "notes_pipeline_task_deployer_access_key_id" {
   description = "The AWS access key id that can deploy the notes pipeline."
   value       = module.notes_pipeline.task_deployer_access_key_id
 }

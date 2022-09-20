@@ -40,19 +40,19 @@ resource "github_branch_protection" "travel" {
 resource "github_actions_secret" "notes_pipeline_repository_url" {
   repository      = github_repository.travel.name
   secret_name     = "REPOSITORY_URL"
-  plaintext_value = data.terraform_remote_state.prod.outputs.repository_urls["travel-data-pipeline"]
+  plaintext_value = data.terraform_remote_state.prod.outputs.notes_pipeline_repository_urls["travel_repo"]
 }
 
 resource "github_actions_secret" "notes_pipeline_deployer_access_key" {
   repository      = github_repository.travel.name
   secret_name     = "AWS_ACCESS_KEY_ID"
-  plaintext_value = data.terraform_remote_state.prod.outputs.notes_pipeline_deployer_access_key_id
+  plaintext_value = data.terraform_remote_state.prod.outputs.notes_pipeline_task_deployer_access_key_id
 }
 
 resource "github_actions_secret" "notes_pipeline_deployer_secret_key" {
   repository      = github_repository.travel.name
   secret_name     = "AWS_SECRET_ACCESS_KEY"
-  plaintext_value = data.terraform_remote_state.prod.outputs.notes_pipeline_deployer_secret_access_key
+  plaintext_value = data.terraform_remote_state.prod.outputs.notes_pipeline_task_deployer_secret_access_key
 }
 
 resource "github_actions_secret" "notes_pipeline_task_role_arn" {
