@@ -27,3 +27,13 @@ variable "ecs_cluster_arn" {
   type        = string
   description = "Ecs cluster arn."
 }
+
+variable "subnet_ids" {
+  type        = list(string)
+  description = "A list of subnet ids to launch resources in."
+}
+
+variable "vpc_id" {
+  type        = string
+  description = "Vpc id."
+}

@@ -34,3 +34,13 @@ variable "repo_names" {
   }))
   description = "Repository names."
 }
+
+variable "subnet_ids" {
+  type        = list(string)
+  description = "A list of subnet ids to launch resources in."
+}
+
+variable "vpc_id" {
+  type        = string
+  description = "Vpc id."
+}
