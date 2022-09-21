@@ -60,6 +60,40 @@ data "aws_iam_policy_document" "cloudwatch" {
   }
 }
 
+data "aws_iam_policy_document" "ecs_run_task" {
+  statement {
+    effect = "Allow"
+
+    actions = ["iam:PassRole"]
+
+    resources = ["*"]
+    
+    condition {
+      test     = "StringLike"
+      variable = "iam:PassedToService"
+      values   = ["ecs-tasks.amazonaws.com"]
+    }
+  }
+
+  statement {
+    effect = "Allow"
+
+    actions = ["ecs:RunTask"]
+
+    resources = ["*"]
+
+    condition {
+      test     = "ArnLike"
+      variable = "ecs:cluster"
+      values   = [var.ecs_cluster_arn]
+    }
+  }
+}
+
+resource "aws_iam_policy" "ecs_run_task" {
+  policy = data.aws_iam_policy_document.ecs_run_task.json
+}
+
 resource "aws_iam_policy" "cloudwatch" {
   policy = data.aws_iam_policy_document.cloudwatch.json
 }
@@ -87,6 +121,11 @@ resource "aws_iam_role" "cloudwatch" {
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
+resource "aws_iam_role" "eventbridge" {
+  name               = "${var.pipeline_bucket_name}-eventbridge_role"
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+}
+
 resource "aws_iam_role_policy_attachment" "s3_role" {
   role       = aws_iam_role.s3_role.name
   policy_arn = aws_iam_policy.s3_role.arn
@@ -100,4 +139,9 @@ resource "aws_iam_role_policy_attachment" "dynamodb_role" {
 resource "aws_iam_role_policy_attachment" "cloudwatch" {
   role       = aws_iam_role.cloudwatch.name
   policy_arn = aws_iam_policy.cloudwatch.arn
+}
+
+resource "aws_iam_role_policy_attachment" "eventbridge" {
+  role       = aws_iam_role.eventbridge.name
+  policy_arn = aws_iam_policy.ecs_run_task.arn
 }

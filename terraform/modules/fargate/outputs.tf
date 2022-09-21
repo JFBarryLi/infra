@@ -23,3 +23,8 @@ output "cloudwatch_log_group_arn" {
   description = "Cloudwatch log group arn."
   value       = aws_cloudwatch_log_group.this.arn
 }
+
+output "task_definition_arn" {
+  description = "FARGATE task definition arn."
+  value       = aws_ecs_task_definition.this.arn
+}
