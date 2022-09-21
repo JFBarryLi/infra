@@ -11,7 +11,7 @@ resource "aws_cloudtrail" "s3" {
     data_resource {
       type = "AWS::S3::Object"
 
-      values = ["${aws_s3_bucket.pipeline.arn}/"]
+      values = ["${aws_s3_bucket.pipeline.arn}/*"]
     }
   }
 }
