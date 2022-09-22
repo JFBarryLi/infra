@@ -47,6 +47,12 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "pipeline" {
   }
 }
 
+resource "aws_s3_bucket_notification" "pipeline" {
+  bucket = aws_s3_bucket.pipeline.id
+
+  eventbridge = true
+}
+
 resource "aws_s3_bucket_policy" "pipeline" {
   bucket = aws_s3_bucket.pipeline.id
   policy = data.aws_iam_policy_document.pipeline.json
