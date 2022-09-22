@@ -5,12 +5,10 @@ resource "aws_cloudwatch_event_rule" "s3_put" {
   event_pattern = <<PATTERN
 {
   "source": ["aws.s3"],
-  "detail-type": ["AWS API Call via CloudTrail"],
+  "detail-type": ["Object Created"],
   "detail": {
-    "eventSource": ["s3.amazonaws.com"],
-    "eventName": ["PutObject"],
-    "requestParameters": {
-      "bucketName": ["${aws_s3_bucket.pipeline.id}"]
+    "bucket": {
+      "name": ["${aws_s3_bucket.pipeline.id}"]
     }
   }
 }
