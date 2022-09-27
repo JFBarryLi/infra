@@ -61,6 +61,21 @@ data "aws_iam_policy_document" "task_role" {
       "${aws_s3_bucket.pipeline.arn}/*"
     ]
   }
+
+  statement {
+    sid    = "AllowEcrAccess"
+    effect = "Allow"
+
+    actions = [
+      "ecr:GetAuthorizationToken",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:GetDownloadUrlForLayer"
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
 }
 
 resource "aws_iam_policy" "task_role" {
