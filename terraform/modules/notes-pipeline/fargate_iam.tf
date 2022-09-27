@@ -53,8 +53,20 @@ data "aws_iam_policy_document" "task_role" {
     effect = "Allow"
 
     actions = [
-      "s3:Get*",
       "s3:ListBucket"
+    ]
+
+    resources = [
+      "${aws_s3_bucket.pipeline.arn}"
+    ]
+  }
+
+  statement {
+    sid    = "AllowObjectAccess"
+    effect = "Allow"
+
+    actions = [
+      "s3:Get*"
     ]
 
     resources = [
