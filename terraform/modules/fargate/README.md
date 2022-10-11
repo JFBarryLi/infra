@@ -28,8 +28,6 @@ No modules.
 | [aws_iam_access_key.task_deployer](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
 | [aws_iam_user.task_deployer](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
 | [aws_iam_user_policy.task_deployer](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy) | resource |
-| [aws_security_group.fargate](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
-| [aws_security_group_rule.fargate_allow_all_outbound](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 | [aws_ecs_task_definition.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ecs_task_definition) | data source |
 | [aws_iam_policy_document.task_deployer](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [template_file.container_definitions](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
@@ -52,6 +50,7 @@ No modules.
 | <a name="output_awslogs_group_name"></a> [awslogs\_group\_name](#output\_awslogs\_group\_name) | Awslogs group name. |
 | <a name="output_cloudwatch_log_group_arn"></a> [cloudwatch\_log\_group\_arn](#output\_cloudwatch\_log\_group\_arn) | Cloudwatch log group arn. |
 | <a name="output_repository_urls"></a> [repository\_urls](#output\_repository\_urls) | Ecr repo urls. |
+| <a name="output_task_definition_arn"></a> [task\_definition\_arn](#output\_task\_definition\_arn) | FARGATE task definition arn. |
 | <a name="output_task_deployer_access_key_id"></a> [task\_deployer\_access\_key\_id](#output\_task\_deployer\_access\_key\_id) | The AWS access key id for the task deployer. |
 | <a name="output_task_deployer_secret_access_key"></a> [task\_deployer\_secret\_access\_key](#output\_task\_deployer\_secret\_access\_key) | The AWS secret access key for managing the task deployer. |
 <!-- END_TF_DOCS -->
