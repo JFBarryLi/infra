@@ -28,6 +28,15 @@ resource "aws_api_gateway_method" "dynamo_get" {
   }
 }
 
+resource "aws_api_gateway_method" "dynamo_options" {
+  authorization = "NONE"
+  http_method   = "OPTIONS"
+  resource_id   = aws_api_gateway_resource.trip.id
+  rest_api_id   = aws_api_gateway_rest_api.dynamo.id
+
+  api_key_required = false
+}
+
 resource "aws_api_gateway_integration" "dynamo" {
   http_method = aws_api_gateway_method.dynamo_get.http_method
   resource_id = aws_api_gateway_resource.trip.id
@@ -52,16 +61,49 @@ resource "aws_api_gateway_integration" "dynamo" {
   }
 }
 
+resource "aws_api_gateway_integration" "dynamo_options" {
+  rest_api_id   = aws_api_gateway_rest_api.dynamo.id
+  resource_id   = aws_api_gateway_resource.trip.id
+  http_method   = aws_api_gateway_method.dynamo_options.http_method
+  type          = "MOCK"
+
+  request_templates = {
+    "application/json" = jsonencode(
+      {
+        statusCode = 200
+      }
+    )
+  }
+}
+
 resource "aws_api_gateway_method_response" "dynamo_200" {
+  depends_on = [aws_api_gateway_integration.dynamo]
+
   rest_api_id = aws_api_gateway_rest_api.dynamo.id
   resource_id = aws_api_gateway_resource.trip.id
   http_method = aws_api_gateway_method.dynamo_get.http_method
   status_code = "200"
 
   response_parameters = {
-    "method.response.header.Timestamp"      = true
-    "method.response.header.Content-Length" = true
-    "method.response.header.Content-Type"   = true
+    "method.response.header.Timestamp"                   = true
+    "method.response.header.Content-Length"              = true
+    "method.response.header.Content-Type"                = true
+    "method.response.header.Access-Control-Allow-Origin" = true
+  }
+}
+
+resource "aws_api_gateway_method_response" "dynamo_options_200" {
+  depends_on = [aws_api_gateway_integration.dynamo_options]
+
+  rest_api_id   = aws_api_gateway_rest_api.dynamo.id
+  resource_id   = aws_api_gateway_resource.trip.id
+  http_method   = aws_api_gateway_method.dynamo_options.http_method
+  status_code   = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = true
+    "method.response.header.Access-Control-Allow-Methods" = true
+    "method.response.header.Access-Control-Allow-Origin"  = true
   }
 }
 
@@ -92,9 +134,24 @@ resource "aws_api_gateway_integration_response" "dynamo_200" {
   status_code = aws_api_gateway_method_response.dynamo_200.status_code
 
   response_parameters = {
-    "method.response.header.Timestamp"      = "integration.response.header.Date"
-    "method.response.header.Content-Length" = "integration.response.header.Content-Length"
-    "method.response.header.Content-Type"   = "integration.response.header.Content-Type"
+    "method.response.header.Timestamp"                   = "integration.response.header.Date"
+    "method.response.header.Content-Length"              = "integration.response.header.Content-Length"
+    "method.response.header.Content-Type"                = "integration.response.header.Content-Type"
+    "method.response.header.Access-Control-Allow-Origin" = "'*'"
+  }
+}
+
+resource "aws_api_gateway_integration_response" "dynamo_options_200" {
+  depends_on = [aws_api_gateway_integration.dynamo_options]  
+
+  rest_api_id   = aws_api_gateway_rest_api.dynamo.id
+  resource_id   = aws_api_gateway_resource.trip.id
+  http_method   = aws_api_gateway_method.dynamo_options.http_method
+  status_code   = aws_api_gateway_method_response.dynamo_options_200.status_code
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+    "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS,POST,PUT'",
+    "method.response.header.Access-Control-Allow-Origin" = "'*'"
   }
 }
 
@@ -128,6 +185,7 @@ resource "aws_api_gateway_deployment" "dynamo" {
       aws_api_gateway_resource.trip.id,
       aws_api_gateway_method.dynamo_get.id,
       aws_api_gateway_integration.dynamo,
+      aws_api_gateway_method.dynamo_options.id,
     ]))
   }
 
