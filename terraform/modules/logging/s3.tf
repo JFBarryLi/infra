@@ -16,10 +16,6 @@ resource "aws_s3_bucket" "log" {
     enabled = true
   }
 
-  logging {
-    target_bucket = var.log_bucket_name
-  }
-
   tags = {
     Name      = var.log_bucket_name
     ManagedBy = "terraform"
