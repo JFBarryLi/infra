@@ -11,10 +11,6 @@ module "alb" {
   log_bucket_name = module.logging.bucket_name
 
   targets = {
-    api_fea = {
-      domain = "api.fea.barryli.ca"
-      port   = 80
-    }
   }
 
   providers = {
