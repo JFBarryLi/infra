@@ -9,7 +9,6 @@ resource "aws_s3_bucket_public_access_block" "log" {
 
 resource "aws_s3_bucket" "log" {
   bucket        = var.log_bucket_name
-  acl           = "log-delivery-write"
   force_destroy = false
 
   versioning {
