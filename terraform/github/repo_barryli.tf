@@ -3,7 +3,7 @@ resource "github_repository" "barryli" {
   description  = "My personal website."
   homepage_url = "https://barryli.ca"
 
-  visibility             = "private"
+  visibility             = "public"
   delete_branch_on_merge = true
   has_issues             = true
   has_wiki               = true

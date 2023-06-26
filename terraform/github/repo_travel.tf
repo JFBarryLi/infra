@@ -1,9 +1,9 @@
 resource "github_repository" "travel" {
   name         = "travel"
-  description  = "Travel data piepline."
+  description  = "Travel data pipeline."
   homepage_url = "https://barryli.ca/travel"
 
-  visibility             = "private"
+  visibility             = "public"
   delete_branch_on_merge = true
   has_issues             = true
   has_wiki               = true
