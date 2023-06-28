@@ -88,7 +88,7 @@ resource "aws_api_gateway_method_response" "dynamo_200" {
     "method.response.header.Timestamp"                   = true
     "method.response.header.Content-Length"              = true
     "method.response.header.Content-Type"                = true
-    "method.response.header.Access-Control-Allow-Origin" = true
+    "method.response.header.Access-Control-Allow-Origin" = false
   }
 }
 
@@ -101,9 +101,9 @@ resource "aws_api_gateway_method_response" "dynamo_options_200" {
   status_code   = "200"
 
   response_parameters = {
-    "method.response.header.Access-Control-Allow-Headers" = true
-    "method.response.header.Access-Control-Allow-Methods" = true
-    "method.response.header.Access-Control-Allow-Origin"  = true
+    "method.response.header.Access-Control-Allow-Headers" = false
+    "method.response.header.Access-Control-Allow-Methods" = false
+    "method.response.header.Access-Control-Allow-Origin"  = false
   }
 }
 
@@ -150,7 +150,7 @@ resource "aws_api_gateway_integration_response" "dynamo_options_200" {
   status_code   = aws_api_gateway_method_response.dynamo_options_200.status_code
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-    "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS,POST,PUT'",
+    "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS'",
     "method.response.header.Access-Control-Allow-Origin" = "'*'"
   }
 }
