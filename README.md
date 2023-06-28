@@ -1,9 +1,19 @@
-[![security](https://github.com/JFBarryLi/infra/actions/workflows/security.yml/badge.svg)](https://github.com/JFBarryLi/infra/actions?query=event%3Apush+branch%3Amain+workflow%3Asecurity)
-
 # Infrastructure
-Infrastructure to support my personal projects.
+The infrastructure here are created to support my personal projects.
+
+
+This also support an on-demand remote development setup.
+
+The remote development machine can be configured, and turned On/Off here via GitHub Actions.
 
 ## Projects
+
+### Travel Data Pipeline
+[Github](https://github.com/JFBarryLi/travel)
+
+### Personal Website
+[Github](https://github.com/JFBarryLi/barryli.ca)
+[Barryli.ca](https://barryli.ca)
 
 ### Finite Element Analysis Ui
 [Github](https://github.com/JFBarryLi/fea-ui)
