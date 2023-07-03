@@ -11,6 +11,11 @@ resource "github_repository" "barryli" {
 
   topics = [
     "react",
+    "data-visualization",
+    "nivo",
+    "d3",
+    "react-globe",
+    "redux"
   ]
 }
 
@@ -69,4 +74,10 @@ resource "github_actions_secret" "site_barryli_bucket_region" {
   repository      = github_repository.barryli.name
   secret_name     = "S3_BUCKET_REGION"
   plaintext_value = data.terraform_remote_state.prod.outputs.site_barryli_bucket_region
+}
+
+resource "github_actions_secret" "site_barryli_dynamo_api_key" {
+  repository      = github_repository.barryli.name
+  secret_name     = "TRAVELLOG_API_KEY"
+  plaintext_value = data.terraform_remote_state.prod.outputs.dynamo_proxy_api_key
 }
