@@ -45,6 +45,14 @@ resource "aws_s3_bucket" "log" {
   }
 }
 
+resource "aws_s3_bucket_ownership_controls" "log" {
+  bucket = aws_s3_bucket.log.id
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
 resource "aws_s3_bucket_server_side_encryption_configuration" "log" {
   bucket = aws_s3_bucket.log.bucket
 
@@ -103,6 +111,41 @@ data "aws_iam_policy_document" "log_bucket" {
     principals {
       type        = "Service"
       identifiers = ["cloudtrail.amazonaws.com"]
+    }
+
+    actions = ["s3:PutObject"]
+
+    resources = ["${aws_s3_bucket.log.arn}/*"]
+
+    condition {
+      test     = "StringEquals"
+      variable = "s3:x-amz-acl"
+
+      values = ["bucket-owner-full-control"]
+    }
+  }
+
+  statement {
+    sid    = "AWSCloudFrontAclCheck"
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
+    }
+
+    actions = ["s3:GetBucketAcl"]
+
+    resources = [aws_s3_bucket.log.arn]
+  }
+
+  statement {
+    sid    = "AWSCloudFrontWrite"
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
     }
 
     actions = ["s3:PutObject"]

@@ -65,6 +65,6 @@ data "aws_iam_policy_document" "deployer" {
       "cloudfront:ListInvalidations",
     ]
 
-    resources = [aws_cloudfront_distribution.this.arn]
+    resources = [aws_cloudfront_distribution.site.arn]
   }
 }

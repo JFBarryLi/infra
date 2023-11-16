@@ -15,7 +15,7 @@ output "bucket_region" {
 
 output "distribution_id" {
   description = "The ID of the created cloudfront distribution."
-  value       = aws_cloudfront_distribution.this.id
+  value       = aws_cloudfront_distribution.site.id
 }
 
 output "deployer_access_key_id" {
