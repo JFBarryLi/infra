@@ -44,6 +44,24 @@ resource "aws_s3_bucket_lifecycle_configuration" "site" {
   }
 }
 
+resource "aws_s3_bucket_lifecycle_configuration" "www_site" {
+  bucket = aws_s3_bucket.www_site.id
+
+  rule {
+    id     = "${var.domain_name}-www-lifecycle"
+    status = "Enabled"
+
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 1
+    }
+
+    noncurrent_version_transition {
+      noncurrent_days = 365
+      storage_class   = "GLACIER"
+    }
+  }
+}
+
 resource "aws_s3_bucket_logging" "site" {
   bucket = aws_s3_bucket.site.id
 
