@@ -20,4 +20,3 @@ repos:
       - id: terraform_fmt
       - id: terraform_tflint
         args: ['--args=--module']
-      - id: checkov

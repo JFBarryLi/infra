@@ -26,8 +26,8 @@ resource "aws_cloudwatch_event_target" "ecs" {
     task_definition_arn = "arn:aws:ecs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:task-definition/${var.task_name}"
 
     network_configuration {
-      subnets         = var.subnet_ids
-      security_groups = [aws_security_group.fargate.id]
+      subnets          = var.subnet_ids
+      security_groups  = [aws_security_group.fargate.id]
       assign_public_ip = true
     }
     launch_type = "FARGATE"

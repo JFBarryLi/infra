@@ -34,9 +34,9 @@ resource "aws_api_gateway_integration" "s3" {
   credentials = aws_iam_role.s3_role.arn
 
   request_parameters = {
-    "integration.request.path.key" = "method.request.path.item",
+    "integration.request.path.key"                            = "method.request.path.item",
     "integration.request.header.x-amz-server-side-encryption" = "'AES256'",
-    "integration.request.header.x-amz-acl" = "'bucket-owner-full-control'"
+    "integration.request.header.x-amz-acl"                    = "'bucket-owner-full-control'"
   }
 }
 
@@ -148,8 +148,8 @@ resource "aws_api_gateway_method_settings" "s3" {
 }
 
 resource "aws_api_gateway_usage_plan" "s3" {
-  name         = "${var.environment}-agw-s3-proxy-usage-plan"
-  description  = "API usage plan for agw s3 proxy."
+  name        = "${var.environment}-agw-s3-proxy-usage-plan"
+  description = "API usage plan for agw s3 proxy."
 
   api_stages {
     api_id = aws_api_gateway_rest_api.s3.id
