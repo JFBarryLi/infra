@@ -11,36 +11,46 @@ resource "aws_s3_bucket" "log" {
   bucket        = var.log_bucket_name
   force_destroy = false
 
-  versioning {
-    enabled = true
-  }
-
   tags = {
     Name      = var.log_bucket_name
     ManagedBy = "terraform"
   }
+}
 
-  lifecycle_rule {
-    id                                     = "all-logs-lifecycle"
-    enabled                                = true
-    abort_incomplete_multipart_upload_days = 1
+resource "aws_s3_bucket_versioning" "log" {
+  bucket = aws_s3_bucket.log.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_lifecycle_configuration" "log" {
+  bucket = aws_s3_bucket.log.id
+
+  rule {
+    id     = "all-logs-lifecycle"
+    status = "Enabled"
+
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 1
+    }
 
     transition {
-      days          = "30"
+      days          = 30
       storage_class = "GLACIER"
     }
 
     noncurrent_version_transition {
-      days          = "30"
-      storage_class = "GLACIER"
+      noncurrent_days = 30
+      storage_class   = "GLACIER"
     }
 
     expiration {
-      days = "365"
+      days = 365
     }
 
     noncurrent_version_expiration {
-      days = "365"
+      noncurrent_days = 365
     }
   }
 }

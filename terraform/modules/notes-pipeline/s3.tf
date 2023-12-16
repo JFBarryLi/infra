@@ -9,32 +9,44 @@ resource "aws_s3_bucket_public_access_block" "pipeline" {
 
 resource "aws_s3_bucket" "pipeline" {
   bucket        = "${var.pipeline_bucket_name}-${var.environment}"
-  acl           = "private"
   force_destroy = false
-
-  versioning {
-    enabled = true
-  }
-
-  logging {
-    target_bucket = var.log_bucket_name
-  }
-
-  lifecycle_rule {
-    id                                     = "${var.pipeline_bucket_name}-lifecycle"
-    enabled                                = true
-    abort_incomplete_multipart_upload_days = 1
-
-    noncurrent_version_transition {
-      days          = "30"
-      storage_class = "GLACIER"
-    }
-  }
 
   tags = {
     Name      = var.pipeline_bucket_name
     ManagedBy = "terraform"
   }
+}
+
+resource "aws_s3_bucket_versioning" "pipeline" {
+  bucket = aws_s3_bucket.pipeline.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_lifecycle_configuration" "pipeline" {
+  bucket = aws_s3_bucket.pipeline.id
+
+  rule {
+    id     = "${var.pipeline_bucket_name}-lifecycle"
+    status = "Enabled"
+
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 1
+    }
+
+    noncurrent_version_transition {
+      noncurrent_days = 30
+      storage_class   = "GLACIER"
+    }
+  }
+}
+
+resource "aws_s3_bucket_logging" "pipeline" {
+  bucket = aws_s3_bucket.pipeline.id
+
+  target_bucket = var.log_bucket_name
+  target_prefix = "notes-pipeline/"
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "pipeline" {

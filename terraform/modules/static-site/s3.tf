@@ -1,26 +1,6 @@
 resource "aws_s3_bucket" "site" {
   bucket        = var.domain_name
-  acl           = "private"
   force_destroy = true
-
-  versioning {
-    enabled = true
-  }
-
-  logging {
-    target_bucket = var.log_bucket_name
-  }
-
-  lifecycle_rule {
-    id                                     = "${var.domain_name}-lifecycle"
-    enabled                                = true
-    abort_incomplete_multipart_upload_days = 1
-
-    noncurrent_version_transition {
-      days          = "365"
-      storage_class = "GLACIER"
-    }
-  }
 
   tags = {
     Name      = var.domain_name
@@ -30,7 +10,6 @@ resource "aws_s3_bucket" "site" {
 
 resource "aws_s3_bucket" "www_site" {
   bucket        = "www.${var.domain_name}"
-  acl           = "private"
   force_destroy = true
 
   tags = {
@@ -38,6 +17,38 @@ resource "aws_s3_bucket" "www_site" {
     ManagedBy = "terraform"
   }
 
+}
+
+resource "aws_s3_bucket_versioning" "site" {
+  bucket = aws_s3_bucket.site.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_lifecycle_configuration" "site" {
+  bucket = aws_s3_bucket.site.id
+
+  rule {
+    id     = "${var.domain_name}-lifecycle"
+    status = "Enabled"
+
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 1
+    }
+
+    noncurrent_version_transition {
+      noncurrent_days = 365
+      storage_class   = "GLACIER"
+    }
+  }
+}
+
+resource "aws_s3_bucket_logging" "site" {
+  bucket = aws_s3_bucket.site.id
+
+  target_bucket = var.log_bucket_name
+  target_prefix = "${var.domain_name}/"
 }
 
 resource "aws_s3_bucket_website_configuration" "www_site" {
