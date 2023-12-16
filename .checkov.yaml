@@ -1,0 +1,14 @@
+block-list-secret-scan: []
+branch: master
+download-external-modules: false
+evaluate-variables: true
+external-modules-download-path: .external_modules
+mask: []
+secrets-history-timeout: 12h
+secrets-scan-file-type: []
+skip-check:
+- CKV_AWS_144
+- CKV2_AWS_38
+- CKV_AWS_145 # Default AWS AES-256 encryption is good enough for now, revisit later if KMS is necessary.
+skip-resources-without-violations: true
+summary-position: bottom
