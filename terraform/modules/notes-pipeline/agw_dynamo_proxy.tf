@@ -186,6 +186,8 @@ resource "aws_api_gateway_deployment" "dynamo" {
       aws_api_gateway_method.dynamo_get.id,
       aws_api_gateway_integration.dynamo,
       aws_api_gateway_method.dynamo_options.id,
+      aws_api_gateway_integration_response.dynamo_options_200,
+      aws_api_gateway_integration_response.dynamo_200,
     ]))
   }
 
