@@ -7,13 +7,8 @@ resource "aws_route53_record" "mx_google_email" {
   ttl     = 3600
 
   records = [
-    "5 GMR-SMTP-IN.L.GOOGLE.COM.",
-    "10 ALT1.GMR-SMTP-IN.L.GOOGLE.COM.",
-    "20 ALT2.GMR-SMTP-IN.L.GOOGLE.COM.",
-    "30 ALT3.GMR-SMTP-IN.L.GOOGLE.COM.",
-    "40 ALT4.GMR-SMTP-IN.L.GOOGLE.COM.",
-    "100 mxa.mailgun.org",
-    "100 mxb.mailgun.org",
+    "10 mxa.mailgun.org",
+    "10 mxb.mailgun.org",
   ]
 }
 
