@@ -20,7 +20,7 @@ resource "aws_route53_record" "squarespace_spf" {
   type    = "TXT"
   ttl     = "3600"
 
-  records = ["v=spf1 include:mailgun.org ~all"]
+  records = ["v=spf1 include:mailgun.org include:_spf.google.com ~all"]
 }
 
 resource "aws_route53_record" "squarespace_dkim" {
