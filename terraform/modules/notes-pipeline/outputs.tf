@@ -55,3 +55,8 @@ output "travel_table" {
   description = "Dynamodb table storing the processed travel data."
   value       = aws_dynamodb_table.travel_log.name
 }
+
+output "adventure_table" {
+  description = "Dyanmodb table storing the processed adventure data."
+  value       = aws_dynamodb_table.adventure_log.name
+}

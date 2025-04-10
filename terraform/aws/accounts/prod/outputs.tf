@@ -150,3 +150,8 @@ output "notes_pipeline_travel_table" {
   description = "Dyamodb table containg the processed travel data."
   value       = module.notes_pipeline.travel_table
 }
+
+output "notes_pipeline_adventure_table" {
+  description = "Dyamodb table containg the processed adventure data."
+  value       = module.notes_pipeline.adventure_table
+}
